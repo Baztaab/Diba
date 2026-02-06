@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.pyright/
+.ruff_cache/
+
+# Env
+.venv/
+venv/
+.env
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+
+# IDE/OS
+.idea/
+.vscode/
+.DS_Store
+
+# Runtime caches
+cache/
+geonames*.sqlite
+*.sqlite
+
+# Ephemeris binaries (heavy)
+*.se1
+docs/jhora/data/ephe/
+kerykeion/sweph/
+data/
