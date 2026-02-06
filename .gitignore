@@ -26,13 +26,18 @@ htmlcov/
 .vscode/
 .DS_Store
 
-# Runtime caches
+# Data heavy/runtime-only
+data/ephe/
+data/cache/
+data/geonames/
 cache/
 geonames*.sqlite
 *.sqlite
 
 # Ephemeris binaries (heavy)
 *.se1
-docs/jhora/data/ephe/
-kerykeion/sweph/
-data/
+
+# Ephemeris locations (ignore binaries only)
+kerykeion/sweph/*.se1
+docs/jhora/data/ephe/*.se1
+data/ephe/*.se1
