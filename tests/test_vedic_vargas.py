@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from kerykeion.vedic.vargas import compute_varga
+from diba.vedic.vargas import compute_varga
 
 
 def test_d9_method1_aries_taurus_boundaries() -> None:
@@ -204,7 +204,7 @@ def test_d7_mirror_scope_only_method2() -> None:
 
 
 def test_d7_mirror_disabled_without_compat() -> None:
-    from kerykeion.vedic.factory import VedicSubjectFactory
+    from diba.vedic.factory import VedicSubjectFactory
 
     model = VedicSubjectFactory.from_birth_data(
         year=1997,

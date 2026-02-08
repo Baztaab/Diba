@@ -1,6 +1,6 @@
 import argparse
 
-from kerykeion import cli
+from diba import cli
 
 
 class _Point:
@@ -32,10 +32,10 @@ class _Model:
 
 def test_run_vedic_d1_parses_and_calls(monkeypatch):
     monkeypatch.setattr(
-        "kerykeion._cli.commands.vedic_d1.VedicSubjectFactory.from_birth_data",
+        "diba._cli.commands.vedic_d1.VedicSubjectFactory.from_birth_data",
         lambda **_kw: _Model(),
     )
-    monkeypatch.setattr("kerykeion._cli.commands.vedic_d1.resolve_ephemeris_path", lambda _cli_arg, _online: None)
+    monkeypatch.setattr("diba._cli.commands.vedic_d1.resolve_ephemeris_path", lambda _cli_arg, _online: None)
 
     ns = argparse.Namespace(
         name="Test",

@@ -7,11 +7,11 @@ from pathlib import Path
 
 
 def test_no_swe_outside_context_or_registry():
-    vedic_path = Path(__file__).resolve().parents[1] / "kerykeion" / "vedic"
-    allowed_import = {"kerykeion.vedic.context"}
-    allowed_calls = {"kerykeion.vedic.context"}
+    vedic_path = Path(__file__).resolve().parents[1] / "diba" / "vedic"
+    allowed_import = {"diba.vedic.context"}
+    allowed_calls = {"diba.vedic.context"}
 
-    for module_info in pkgutil.walk_packages([str(vedic_path)], prefix="kerykeion.vedic."):
+    for module_info in pkgutil.walk_packages([str(vedic_path)], prefix="diba.vedic."):
         module = importlib.import_module(module_info.name)
         source = inspect.getsource(module)
 
@@ -22,7 +22,7 @@ def test_no_swe_outside_context_or_registry():
 
 
 def test_no_swe_calls_outside_context_in_repo() -> None:
-    root = Path(__file__).resolve().parents[1] / "kerykeion"
+    root = Path(__file__).resolve().parents[1] / "diba"
     allowed = {str(root / "vedic" / "context.py").replace("\\", "/")}
 
     offenders = []

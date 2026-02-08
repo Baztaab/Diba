@@ -1,5 +1,5 @@
-from kerykeion.schemas.kr_models import VedicModel
-from kerykeion.vedic.factory import VedicSubjectFactory
+from diba.schemas.kr_models import VedicModel
+from diba.vedic.factory import VedicSubjectFactory
 
 
 def test_vedic_factory_smoke_and_determinism():

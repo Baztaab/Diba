@@ -1,7 +1,7 @@
 import pytest
 from dataclasses import FrozenInstanceError # For strict immutability check
 
-from kerykeion.vedic.registry import (
+from diba.vedic.registry import (
     resolve_ayanamsa,
     resolve_house_system,
     HouseFetchPlan,

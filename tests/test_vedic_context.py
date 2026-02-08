@@ -1,7 +1,7 @@
 import swisseph as swe
 
-from kerykeion.vedic.context import VedicCalculationContext, PLANET_FLAGS, ASC_FLAGS
-from kerykeion.vedic.registry import resolve_ayanamsa, resolve_house_system
+from diba.vedic.context import VedicCalculationContext, PLANET_FLAGS, ASC_FLAGS
+from diba.vedic.registry import resolve_ayanamsa, resolve_house_system
 
 
 def test_houses_ex_default_equivalence():

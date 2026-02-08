@@ -6,11 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from kerykeion.vedic.factory import VedicSubjectFactory
+from diba.vedic.factory import VedicSubjectFactory
 
 
 def test_vedic_factory_imports_stay_pure() -> None:
-    factory_path = Path(__file__).resolve().parents[1] / "kerykeion" / "vedic" / "factory.py"
+    factory_path = Path(__file__).resolve().parents[1] / "diba" / "vedic" / "factory.py"
     tree = ast.parse(factory_path.read_text(encoding="utf-8"))
     banned_prefixes = ("requests", "requests_cache", "sqlite3", "fetch_geonames")
     offenders: list[str] = []

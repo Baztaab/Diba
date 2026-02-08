@@ -1,7 +1,7 @@
 import swisseph as swe
 
-from kerykeion.vedic.context import VedicCalculationContext
-from kerykeion.vedic.registry import (
+from diba.vedic.context import VedicCalculationContext
+from diba.vedic.registry import (
     HouseFetchPlan,
     HouseSystemSpec,
     resolve_ayanamsa,

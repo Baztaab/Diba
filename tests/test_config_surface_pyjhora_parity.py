@@ -1,9 +1,9 @@
 import pytest
 
-from kerykeion.vedic.registry import (
+from diba.vedic.registry import (
     AYANAMSA_REGISTRY,
     HOUSE_SYSTEM_REGISTRY,
-    NODE_POLICY_REGISTRY,
+    NODE_MODE_REGISTRY,
     VedicRegistryError,
     resolve_ayanamsa,
 )
@@ -54,5 +54,5 @@ def test_house_methods_1_to_5_are_surfaced():
 
 
 def test_node_policies_mean_and_true_are_available():
-    keys = set(NODE_POLICY_REGISTRY.keys())
+    keys = set(NODE_MODE_REGISTRY.keys())
     assert {"mean", "true"}.issubset(keys)

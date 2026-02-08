@@ -1,6 +1,6 @@
 import pytest
 
-from kerykeion.vedic.factory import VedicFactoryError, VedicSubjectFactory, _split_seconds
+from diba.vedic.factory import VedicFactoryError, VedicSubjectFactory, _split_seconds
 
 
 def test_split_seconds_rounding_carry_edges():
