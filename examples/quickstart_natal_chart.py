@@ -1,8 +1,8 @@
-"""Quickstart example for Kerykeion v5: natal chart calculation and SVG export."""
+"""Quickstart example for Diba v5: natal chart calculation and SVG export."""
 
 from pathlib import Path
 
-from kerykeion import AstrologicalSubjectFactory, ChartDataFactory, ChartDrawer
+from diba import AstrologicalSubjectFactory, ChartDataFactory, ChartDrawer
 
 
 def main() -> None:

@@ -2,7 +2,7 @@
 
 from datetime import datetime, timedelta, timezone
 
-from kerykeion import (
+from diba import (
     AstrologicalSubjectFactory,
     EphemerisDataFactory,
     TransitsTimeRangeFactory,

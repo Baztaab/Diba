@@ -1,6 +1,6 @@
 """Synastry aspect calculation using the unified AspectsFactory."""
 
-from kerykeion import AstrologicalSubjectFactory, AspectsFactory
+from diba import AstrologicalSubjectFactory, AspectsFactory
 
 
 def main() -> None:

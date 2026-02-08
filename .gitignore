@@ -38,7 +38,7 @@ geonames*.sqlite
 *.se1
 
 # Ephemeris locations (ignore binaries only)
-kerykeion/sweph/*.se1
+diba/sweph/*.se1
 docs/jhora/data/ephe/*.se1
 data/ephe/*.se1
 

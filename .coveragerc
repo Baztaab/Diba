@@ -8,7 +8,7 @@
 
 [html]
 # HTML report configuration
-title = "Kerykeion Test Coverage Report"
+title = "Diba Test Coverage Report"
 
 [report]
 # Exclude patterns from coverage reports

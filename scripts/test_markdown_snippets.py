@@ -80,14 +80,14 @@ if missing_dependencies:
     print("Skipping snippet due to missing dependencies: " + ", ".join(sorted(set(missing_dependencies))))
     sys.exit(0)
 
-# Common imports for kerykeion
+# Common imports for diba
 from typing import Literal, Union
-from kerykeion import (
+from diba import (
     AstrologicalSubjectFactory,
     ChartDataFactory,
     ChartDrawer,
     CompositeSubjectFactory,
-    KerykeionSettingsModel,
+    DibaSettingsModel,
 )
 """
         + code

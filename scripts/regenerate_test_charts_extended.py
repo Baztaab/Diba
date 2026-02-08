@@ -22,10 +22,10 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from kerykeion import AstrologicalSubjectFactory, ChartDrawer, CompositeSubjectFactory
-from kerykeion.chart_data_factory import ChartDataFactory
-from kerykeion.planetary_return_factory import PlanetaryReturnFactory
-from kerykeion.settings.config_constants import ALL_ACTIVE_POINTS
+from diba import AstrologicalSubjectFactory, ChartDrawer, CompositeSubjectFactory
+from diba.chart_data_factory import ChartDataFactory
+from diba.planetary_return_factory import PlanetaryReturnFactory
+from diba.settings.config_constants import ALL_ACTIVE_POINTS
 
 # Import test subject definitions
 from tests.data.test_subjects_matrix import (

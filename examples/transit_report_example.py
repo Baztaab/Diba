@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from kerykeion import ReportGenerator, AstrologicalSubjectFactory, ChartDataFactory
+from diba import ReportGenerator, AstrologicalSubjectFactory, ChartDataFactory
 
 JOHN_LOCATION = {
     "city": "Liverpool",

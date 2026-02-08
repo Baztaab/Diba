@@ -29,7 +29,7 @@ def get_public_members(module):
             if inspect.isclass(obj) or inspect.isfunction(obj):
                 # Ensure the object is defined in this module or one of its submodules
                 # This prevents listing imported externals
-                if hasattr(obj, "__module__") and obj.__module__ and obj.__module__.startswith("kerykeion"):
+                if hasattr(obj, "__module__") and obj.__module__ and obj.__module__.startswith("diba"):
                     members.append((name, obj))
 
     return members
@@ -78,10 +78,10 @@ def load_documentation_content(docs_dir):
 
 
 def main():
-    print("Starting Kerykeion Documentation Coverage Audit...")
+    print("Starting Diba Documentation Coverage Audit...")
 
     # 1. Scan Codebase
-    codebase_members = scan_package("kerykeion")
+    codebase_members = scan_package("diba")
 
     # 2. Load Documentation
     docs_path = Path(__file__).parent.parent / "site" / "docs"
@@ -103,7 +103,7 @@ def main():
         "charts",  # Module itself
         "utilities",  # Module itself
         "__init__",
-        "kerykeion",
+        "diba",
         "print_function",
     ]
 

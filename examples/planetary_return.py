@@ -1,8 +1,8 @@
-"""Solar return calculation and visualization with Kerykeion v5."""
+"""Solar return calculation and visualization with Diba v5."""
 
 from pathlib import Path
 
-from kerykeion import (
+from diba import (
     AstrologicalSubjectFactory,
     ChartDataFactory,
     ChartDrawer,

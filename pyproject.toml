@@ -1,8 +1,8 @@
 [project]
-name = "kerykeion"
+name = "diba"
 version = "5.7.0"
 authors = [
-    { name = "Giacomo Battaglia", email = "kerykeion.astrology@gmail.com" }
+    { name = "Giacomo Battaglia", email = "diba.astrology@gmail.com" }
 ]
 description = "A Python library for astrological calculations, including natal charts, houses, planetary aspects, and SVG chart generation."
 license = { text = "AGPL-3.0" }
@@ -58,19 +58,19 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://www.kerykeion.net/"
-Repository = "https://github.com/g-battaglia/kerykeion"
+Homepage = "https://www.diba.net/"
+Repository = "https://github.com/g-battaglia/diba"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["kerykeion"]
+packages = ["diba"]
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "/kerykeion",
+    "/diba",
     "/README.md",
     "/LICENSE",
     "/pyproject.toml",
@@ -80,8 +80,8 @@ include = [
 # MyPy Static Analysis
 [tool.mypy]
 ignore_missing_imports = true
-mypy_path = "kerykeion"
-files = "kerykeion"
+mypy_path = "diba"
+files = "diba"
 
 # PyTest Automated Testing
 [tool.pytest.ini_options]
@@ -95,7 +95,7 @@ addopts = ""
 
 # Coverage Configuration
 [tool.coverage.run]
-source = ["kerykeion"]
+source = ["diba"]
 omit = [
     "*/tests/*",
     "*/test_*",
@@ -103,7 +103,7 @@ omit = [
     "*/sweph/*",  # Swiss Ephemeris library files
     "setup.py",
     "**/draw_planets_legacy.py",  # Legacy code, not used
-    "kerykeion/charts/draw_planets_legacy.py",  # Legacy code, not used
+    "diba/charts/draw_planets_legacy.py",  # Legacy code, not used
 ]
 
 [tool.coverage.report]
@@ -130,8 +130,8 @@ directory = "htmlcov"
 [tool.poe.tasks]
 # Test
 test = "pytest"
-"test:cov" = "pytest --cov=kerykeion --cov-config=pyproject.toml --cov-report=html --cov-report=term --cov-report=xml"
-"test:cov-xml" = "pytest --cov=kerykeion --cov-report=xml"
+"test:cov" = "pytest --cov=diba --cov-config=pyproject.toml --cov-report=html --cov-report=term --cov-report=xml"
+"test:cov-xml" = "pytest --cov=diba --cov-report=xml"
 "test:nocharts" = "pytest --ignore-glob='*chart*.py'"
 "test:core" = "pytest tests/core/ -v"
 "test:aspects" = "pytest tests/aspects/ -v"
@@ -139,12 +139,12 @@ test = "pytest"
 "test:charts" = "pytest tests/charts/ -v"
 "test:quick" = "pytest tests/core/ tests/aspects/ -v --ignore=tests/charts/"
 "test:fast" = "pytest -n auto"
-"test:fast:cov" = "pytest -n auto --cov=kerykeion --cov-config=pyproject.toml --cov-report=html --cov-report=term --cov-report=xml"
+"test:fast:cov" = "pytest -n auto --cov=diba --cov-config=pyproject.toml --cov-report=html --cov-report=term --cov-report=xml"
 
 # Code Quality
 lint = "ruff check"
 format = "ruff format"
-"format:all" = "ruff format kerykeion tests"
+"format:all" = "ruff format diba tests"
 analyze = "mypy"
 typecheck = "pyright"
 
@@ -158,7 +158,7 @@ help = "Run quality check script"
 
 # Documentation
 [tool.poe.tasks.docs]
-cmd = "pdoc kerykeion -o ./docs"
+cmd = "pdoc diba -o ./docs"
 help = "Generate API documentation"
 
 [tool.poe.tasks."docs:check"]
@@ -235,17 +235,17 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 # Backward compatibility module uses import * intentionally
-"kerykeion/backword.py" = ["F405", "F403", "F401"]
+"diba/backword.py" = ["F405", "F403", "F401"]
 # Settings re-exports symbols intentionally
-"kerykeion/settings/__init__.py" = ["F401", "F403"]
+"diba/settings/__init__.py" = ["F401", "F403"]
 # Schemas re-exports for public API
-"kerykeion/schemas/__init__.py" = ["F401", "F403"]
+"diba/schemas/__init__.py" = ["F401", "F403"]
 # Types re-exports for public API
-"kerykeion/kr_types/__init__.py" = ["F405", "F403", "F401"]
+"diba/kr_types/__init__.py" = ["F405", "F403", "F401"]
 
 # Pyright Static Type Checking
 [tool.pyright]
-include = ["kerykeion"]
+include = ["diba"]
 exclude = [
     "tests",
     "examples",

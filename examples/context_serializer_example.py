@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This is part of Kerykeion (C) 2025 Giacomo Battaglia
+This is part of Diba (C) 2025 Giacomo Battaglia
 
 Context Serializer Examples
 
@@ -8,7 +8,7 @@ This example demonstrates how to use the context_serializer module
 to transform ALL types of astrological data into AI-readable textual context.
 """
 
-from kerykeion import (
+from diba import (
     AstrologicalSubjectFactory,
     ChartDataFactory,
     CompositeSubjectFactory,
@@ -148,14 +148,14 @@ The to_context() function supports all major chart types:
 5. Solar Returns (PlanetReturnModel)
 6. Lunar Returns (PlanetReturnModel)
 7. Transit Charts (DualChartDataModel)
-8. Individual Points (KerykeionPointModel)
+8. Individual Points (DibaPointModel)
 9. Lunar Phase (LunarPhaseModel)
 10. Individual Aspects (AspectModel)
 11. Element Distribution (ElementDistributionModel)
 12. Quality Distribution (QualityDistributionModel)
 
 Usage:
-  from kerykeion import to_context
+  from diba import to_context
   context = to_context(any_model)
   print(context)
 """)

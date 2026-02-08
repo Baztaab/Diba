@@ -11,7 +11,7 @@ from io import StringIO
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from kerykeion import ReportGenerator, AstrologicalSubjectFactory, ChartDataFactory
+from diba import ReportGenerator, AstrologicalSubjectFactory, ChartDataFactory
 
 
 def regenerate_report():

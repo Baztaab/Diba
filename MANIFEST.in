@@ -1,6 +1,6 @@
 include README.md
 include LICENSE
-recursive-include kerykeion *.xml
-recursive-include kerykeion *.json
-recursive-include kerykeion *.se1
-recursive-include kerykeion *.txt
+recursive-include diba *.xml
+recursive-include diba *.json
+recursive-include diba *.se1
+recursive-include diba *.txt

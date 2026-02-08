@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Regenerate synastry aspects with exact test parameters"""
 
-from kerykeion.astrological_subject_factory import AstrologicalSubjectFactory
-from kerykeion.aspects.aspects_factory import AspectsFactory
+from diba.astrological_subject_factory import AstrologicalSubjectFactory
+from diba.aspects.aspects_factory import AspectsFactory
 import json
 from pathlib import Path
 

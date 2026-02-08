@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Unified Regeneration Script for Kerykeion Test Data
+Unified Regeneration Script for Diba Test Data
 
 This script regenerates all test baseline data and SVG files used by the test suite.
 It consolidates the functionality of multiple regeneration scripts into one.
@@ -39,9 +39,9 @@ from typing import Any, Dict, List, Optional, Tuple
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from kerykeion import AstrologicalSubjectFactory
-from kerykeion.aspects.aspects_factory import AspectsFactory
-from kerykeion.schemas import AstrologicalPoint
+from diba import AstrologicalSubjectFactory
+from diba.aspects.aspects_factory import AspectsFactory
+from diba.schemas import AstrologicalPoint
 from typing import get_args
 
 
@@ -117,7 +117,7 @@ def create_subject_from_data(data: Dict[str, Any]) -> Optional[Any]:
 
 
 def extract_point_data(point) -> Dict[str, Any]:
-    """Extract relevant data from a KerykeionPointModel."""
+    """Extract relevant data from a DibaPointModel."""
     if point is None:
         return {}
 
@@ -569,7 +569,7 @@ def validate_data() -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Unified regeneration script for Kerykeion test data",
+        description="Unified regeneration script for Diba test data",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -614,7 +614,7 @@ def main():
         return
 
     print("=" * 60)
-    print("KERYKEION TEST DATA REGENERATION")
+    print("DIBA TEST DATA REGENERATION")
     print("=" * 60)
     print(f"Started: {datetime.now().isoformat()}")
 

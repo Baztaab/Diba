@@ -1,8 +1,8 @@
 """Example of generating a full astrological report for the current time."""
 
-from kerykeion import ReportGenerator
-from kerykeion import ChartDataFactory
-from kerykeion import AstrologicalSubjectFactory
+from diba import ReportGenerator
+from diba import ChartDataFactory
+from diba import AstrologicalSubjectFactory
 
 now = AstrologicalSubjectFactory.from_current_time(geonames_username="century.boy")
 

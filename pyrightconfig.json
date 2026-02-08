@@ -1,5 +1,5 @@
 {
-  "include": ["kerykeion"],
+  "include": ["diba"],
   "exclude": [
     "tests",
     "examples",

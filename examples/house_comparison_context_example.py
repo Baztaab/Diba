@@ -7,7 +7,7 @@ This example shows how the new house comparison serialization works
 for different dual chart types.
 """
 
-from kerykeion import AstrologicalSubjectFactory, ChartDataFactory, to_context
+from diba import AstrologicalSubjectFactory, ChartDataFactory, to_context
 
 # Create two subjects for synastry
 john = AstrologicalSubjectFactory.from_birth_data(

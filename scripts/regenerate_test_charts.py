@@ -18,13 +18,13 @@ All files are saved to tests/charts/svg/ with geonames authentication included.
 """
 
 from pathlib import Path
-from kerykeion.composite_subject_factory import CompositeSubjectFactory
-from kerykeion.chart_data_factory import ChartDataFactory
-from kerykeion.charts.chart_drawer import ChartDrawer
-from kerykeion.charts.charts_utils import makeLunarPhase
-from kerykeion.astrological_subject_factory import AstrologicalSubjectFactory
-from kerykeion.planetary_return_factory import PlanetaryReturnFactory
-from kerykeion.settings.config_constants import ALL_ACTIVE_POINTS, TRADITIONAL_ASTROLOGY_ACTIVE_POINTS
+from diba.composite_subject_factory import CompositeSubjectFactory
+from diba.chart_data_factory import ChartDataFactory
+from diba.charts.chart_drawer import ChartDrawer
+from diba.charts.charts_utils import makeLunarPhase
+from diba.astrological_subject_factory import AstrologicalSubjectFactory
+from diba.planetary_return_factory import PlanetaryReturnFactory
+from diba.settings.config_constants import ALL_ACTIVE_POINTS, TRADITIONAL_ASTROLOGY_ACTIVE_POINTS
 
 # Set output directory for all chart SVGs
 OUTPUT_DIR = Path(__file__).parent.parent / "tests" / "charts" / "svg"
@@ -52,8 +52,8 @@ def regenerate_lunar_phase_reference_sheet() -> None:
         '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="40" viewBox="0 0 320 40">',
         "    <style>",
         "        :root {",
-        "            --kerykeion-chart-color-lunar-phase-0: #000000;",
-        "            --kerykeion-chart-color-lunar-phase-1: #ffffff;",
+        "            --diba-chart-color-lunar-phase-0: #000000;",
+        "            --diba-chart-color-lunar-phase-1: #ffffff;",
         "        }",
         "    </style>",
     ]
@@ -292,7 +292,7 @@ morinus_house_chart = ChartDrawer(morinus_house_chart_data)
 morinus_house_chart.save_svg(output_path=OUTPUT_DIR_STR)
 
 ## To check all the available house systems uncomment the following code:
-# from kerykeion.schemas import HousesSystemIdentifier
+# from diba.schemas import HousesSystemIdentifier
 # from typing import get_args
 # for i in get_args(HousesSystemIdentifier):
 #     alternatives_house_subject = AstrologicalSubjectFactory.from_birth_data(f"John Lennon - House System {i}", 1940, 10, 9, 18, 30, "Liverpool", "GB", houses_system=i)
@@ -2079,7 +2079,7 @@ no_degree_chart = ChartDrawer(no_degree_chart_data, show_degree_indicators=False
 no_degree_chart.save_svg(output_path=OUTPUT_DIR_STR)
 
 # Custom colors_settings
-from kerykeion.settings.chart_defaults import (
+from diba.settings.chart_defaults import (
     DEFAULT_CHART_COLORS,
     DEFAULT_CHART_ASPECTS_SETTINGS,
     DEFAULT_CELESTIAL_POINTS_SETTINGS,

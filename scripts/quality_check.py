@@ -1,4 +1,4 @@
-"""Quality check script for kerykeion project."""
+"""Quality check script for diba project."""
 
 import subprocess
 import sys

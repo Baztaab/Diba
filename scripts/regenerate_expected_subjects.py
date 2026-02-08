@@ -14,8 +14,8 @@ from pprint import pformat
 from typing import Dict, Iterable
 from typing import get_args
 
-from kerykeion import AstrologicalSubjectFactory
-from kerykeion.schemas import AstrologicalPoint
+from diba import AstrologicalSubjectFactory
+from diba.schemas import AstrologicalPoint
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = REPO_ROOT / "tests" / "data" / "expected_astrological_subjects.py"
