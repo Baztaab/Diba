@@ -1,0 +1,22 @@
+{
+  "id": "scenario_02",
+  "label": "Tehran midnight edge (as provided by JHora output)",
+  "datetime_local": "2010-01-01T00:05:00",
+  "timezone": {
+    "iana": "Asia/Tehran",
+    "dst_expected": false,
+    "utc_offset": "+03:30",
+    "datetime_utc": "2009-12-31T20:35:00Z"
+  },
+  "location": {
+    "name": "Tehran, Iran",
+    "lat": 32.7,
+    "lon": 51.15,
+    "alt_m": 0.0
+  },
+  "settings": {
+    "zodiac": "sidereal",
+    "ayanamsa_id": "lahiri",
+    "house_system_id": "whole_sign"
+  }
+}

@@ -1,5 +1,4 @@
 import pytest
-import swisseph as swe
 from dataclasses import FrozenInstanceError # For strict immutability check
 
 from kerykeion.vedic.registry import (
@@ -14,7 +13,7 @@ def test_registry_ayanamsa_resolution():
     # Test case-insensitive
     spec = resolve_ayanamsa("Lahiri")
     assert spec.id == "lahiri"
-    assert spec.swe_mode == swe.SIDM_LAHIRI
+    assert spec.swe_mode == "SIDM_LAHIRI"
 
     # Test invalid input
     with pytest.raises(VedicRegistryError) as excinfo:

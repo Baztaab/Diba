@@ -1,0 +1,47 @@
+{
+  "schema_version": "static_chart.v0.1",
+  "meta": {
+    "id": "scenario_02",
+    "datetime_local": "2010-01-01T00:05:00",
+    "datetime_utc": "2009-12-31T20:35:00Z",
+    "timezone": "Asia/Tehran",
+    "utc_offset": "+03:30",
+    "dst": false,
+    "zodiac": "sidereal",
+    "ayanamsa_id": "lahiri",
+    "ayanamsa_dms": "23°58'51.35\"",
+    "house_system_id": "whole_sign"
+  },
+  "location": {
+    "name": "Tehran, Iran",
+    "lat": 32.7,
+    "lon": 51.15,
+    "alt_m": 0.0
+  },
+  "points": {
+    "asc": { "dms": "14°Vi47'50.50\"", "rasi": "Virgo" },
+    "sun": { "dms": "16°Sg19'35.10\"", "rasi": "Sagittarius" },
+    "moon": { "dms": "17°Ge07'11.34\"", "rasi": "Gemini" },
+    "mars": { "dms": "24°Cn51'11.73\"", "rasi": "Cancer", "retrograde": true },
+    "mercury": { "dms": "25°Sg08'57.68\"", "rasi": "Sagittarius", "retrograde": true },
+    "jupiter": { "dms": "02°Aq21'03.96\"", "rasi": "Aquarius" },
+    "venus": { "dms": "13°Sg41'52.01\"", "rasi": "Sagittarius" },
+    "saturn": { "dms": "10°Vi31'08.40\"", "rasi": "Virgo" },
+    "rahu": { "dms": "27°Sg39'27.04\"", "rasi": "Sagittarius" },
+    "ketu": { "dms": "27°Ge39'27.04\"", "rasi": "Gemini" }
+  },
+  "houses_whole_sign": {
+    "1": { "rasi": "Virgo", "cusp": "14°Vi47'50.50\"" },
+    "2": { "rasi": "Libra", "cusp": "14°Li47'50.50\"" },
+    "3": { "rasi": "Scorpio", "cusp": "14°Sc47'50.50\"" },
+    "4": { "rasi": "Sagittarius", "cusp": "14°Sg47'50.50\"" },
+    "5": { "rasi": "Capricorn", "cusp": "14°Cp47'50.50\"" },
+    "6": { "rasi": "Aquarius", "cusp": "14°Aq47'50.50\"" },
+    "7": { "rasi": "Pisces", "cusp": "14°Pi47'50.50\"" },
+    "8": { "rasi": "Aries", "cusp": "14°Ar47'50.50\"" },
+    "9": { "rasi": "Taurus", "cusp": "14°Ta47'50.50\"" },
+    "10": { "rasi": "Gemini", "cusp": "14°Ge47'50.50\"" },
+    "11": { "rasi": "Cancer", "cusp": "14°Cn47'50.50\"" },
+    "12": { "rasi": "Leo", "cusp": "14°Le47'50.50\"" }
+  }
+}

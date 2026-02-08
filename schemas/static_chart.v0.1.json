@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "static_chart.v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "meta", "location", "points", "houses_whole_sign"],
+  "properties": {
+    "schema_version": {"const": "static_chart.v0.1"},
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "datetime_local",
+        "datetime_utc",
+        "timezone",
+        "utc_offset",
+        "dst",
+        "zodiac",
+        "ayanamsa_id",
+        "house_system_id"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "datetime_local": {"type": "string"},
+        "datetime_utc": {"type": "string"},
+        "timezone": {"type": "string"},
+        "utc_offset": {"type": "string"},
+        "dst": {"type": "boolean"},
+        "zodiac": {"type": "string"},
+        "ayanamsa_id": {"type": "string"},
+        "ayanamsa_dms": {"type": "string"},
+        "house_system_id": {"type": "string"}
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "lat", "lon", "alt_m"],
+      "properties": {
+        "name": {"type": "string"},
+        "lat": {"type": "number"},
+        "lon": {"type": "number"},
+        "alt_m": {"type": "number"}
+      }
+    },
+    "points": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asc", "sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn", "rahu", "ketu"],
+      "properties": {
+        "asc": {"$ref": "#/definitions/point"},
+        "sun": {"$ref": "#/definitions/point"},
+        "moon": {"$ref": "#/definitions/point"},
+        "mars": {"$ref": "#/definitions/point"},
+        "mercury": {"$ref": "#/definitions/point"},
+        "jupiter": {"$ref": "#/definitions/point"},
+        "venus": {"$ref": "#/definitions/point"},
+        "saturn": {"$ref": "#/definitions/point"},
+        "rahu": {"$ref": "#/definitions/point"},
+        "ketu": {"$ref": "#/definitions/point"}
+      }
+    },
+    "houses_whole_sign": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+      "properties": {
+        "1": {"$ref": "#/definitions/house"},
+        "2": {"$ref": "#/definitions/house"},
+        "3": {"$ref": "#/definitions/house"},
+        "4": {"$ref": "#/definitions/house"},
+        "5": {"$ref": "#/definitions/house"},
+        "6": {"$ref": "#/definitions/house"},
+        "7": {"$ref": "#/definitions/house"},
+        "8": {"$ref": "#/definitions/house"},
+        "9": {"$ref": "#/definitions/house"},
+        "10": {"$ref": "#/definitions/house"},
+        "11": {"$ref": "#/definitions/house"},
+        "12": {"$ref": "#/definitions/house"}
+      }
+    }
+  },
+  "definitions": {
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dms", "rasi"],
+      "properties": {
+        "dms": {"type": "string"},
+        "rasi": {"type": "string"},
+        "retrograde": {"type": "boolean"}
+      }
+    },
+    "house": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rasi", "cusp"],
+      "properties": {
+        "rasi": {"type": "string"},
+        "cusp": {"type": "string"}
+      }
+    }
+  }
+}

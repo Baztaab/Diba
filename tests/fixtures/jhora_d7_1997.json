@@ -1,0 +1,16 @@
+{
+  "D7": {
+    "points": {
+      "ascendant": {"sign": "Sco", "position": 25.169369444444445},
+      "sun": {"sign": "Gem", "position": 18.07282777777778},
+      "moon": {"sign": "Sco", "position": 1.5552972222222223},
+      "mars": {"sign": "Pis", "position": 19.70106111111111},
+      "mercury": {"sign": "Sco", "position": 2.3208305555555553},
+      "jupiter": {"sign": "Cap", "position": 13.110408333333332},
+      "venus": {"sign": "Leo", "position": 13.296463888888889},
+      "saturn": {"sign": "Ari", "position": 11.232572222222222},
+      "rahu": {"sign": "Pis", "position": 23.694005555555556},
+      "ketu": {"sign": "Vir", "position": 23.694005555555556}
+    }
+  }
+}

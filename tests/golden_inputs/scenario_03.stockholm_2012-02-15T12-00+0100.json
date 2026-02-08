@@ -1,0 +1,22 @@
+{
+  "id": "scenario_03",
+  "label": "Stockholm high latitude stress (as provided by JHora output)",
+  "datetime_local": "2012-02-15T12:00:00",
+  "timezone": {
+    "iana": "Europe/Stockholm",
+    "dst_expected": false,
+    "utc_offset": "+01:00",
+    "datetime_utc": "2012-02-15T11:00:00Z"
+  },
+  "location": {
+    "name": "Stockholm, Sweden",
+    "lat": 56.1333333333,
+    "lon": 13.4166666667,
+    "alt_m": 0.0
+  },
+  "settings": {
+    "zodiac": "sidereal",
+    "ayanamsa_id": "lahiri",
+    "house_system_id": "whole_sign"
+  }
+}
