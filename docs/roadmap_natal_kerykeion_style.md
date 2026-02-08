@@ -193,7 +193,19 @@ Notes:
 
 ### 6.1 DoD Matrix
 - D0:
-  - Cases: 12
+  - Cases (fixed IDs with provenance):
+    - `D0-C01 jhora_d7_1988.D7` -> JHora export fixture: `tests/fixtures/jhora_d7_1988.json`
+    - `D0-C02 jhora_d7_1997.D7` -> JHora export fixture: `tests/fixtures/jhora_d7_1997.json`
+    - `D0-C03 jhora_2004.D10` -> JHora export fixture: `tests/fixtures/jhora_d10_d11_d12_d16_d20_2004.json`
+    - `D0-C04 jhora_2004.D11` -> JHora export fixture: `tests/fixtures/jhora_d10_d11_d12_d16_d20_2004.json`
+    - `D0-C05 jhora_2004.D12` -> JHora export fixture: `tests/fixtures/jhora_d10_d11_d12_d16_d20_2004.json`
+    - `D0-C06 jhora_2004.D16` -> JHora export fixture: `tests/fixtures/jhora_d10_d11_d12_d16_d20_2004.json`
+    - `D0-C07 jhora_2004.D20` -> JHora export fixture: `tests/fixtures/jhora_d10_d11_d12_d16_d20_2004.json`
+    - `D0-C08 jhora_d24_2004.D24` -> JHora export fixture: `tests/fixtures/jhora_d24_2004.json`
+    - `D0-C09 jhora_2004.D60` -> JHora export fixture: `tests/fixtures/jhora_d60_d81_d108_d144_2004.json`
+    - `D0-C10 jhora_2004.D81` -> JHora export fixture: `tests/fixtures/jhora_d60_d81_d108_d144_2004.json`
+    - `D0-C11 jhora_2004.D108` -> JHora export fixture: `tests/fixtures/jhora_d60_d81_d108_d144_2004.json`
+    - `D0-C12 jhora_2004.D144` -> JHora export fixture: `tests/fixtures/jhora_d60_d81_d108_d144_2004.json`
   - Tolerance: planets/nodes/asc `<= 1.0 arcsec`
   - Pass: `12/12`, and `0` SwissEph offenders outside context.
 - D1:
@@ -262,4 +274,5 @@ D0 measurable DoD:
 - House methods `1..5` present in registry and validated by tests: `100%`.
 - Context call-order test passes with deterministic `set_ephe_path -> set_sid_mode -> calc_ut/houses_ex -> reset sid mode`.
 - SwissEph offender scan reports `0` uses of `swe.set_*` outside `kerykeion/vedic/context.py`.
-- D0 test set pass condition: `3/3` test files green.
+- D0 fixture set is fixed to `D0-C01..D0-C12` (listed in `6.1 DoD Matrix`) with JHora-export provenance.
+- D0 test set pass condition: `3/3` test files green + `12/12` fixture IDs pass under declared tolerance.
