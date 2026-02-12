@@ -4,8 +4,8 @@ This is part of Diba (C) 2025 Giacomo Battaglia
 """
 
 from typing import Literal
-from typing_extensions import TypeAlias
 
+from typing_extensions import TypeAlias
 
 ZodiacType: TypeAlias = Literal["Tropical", "Sidereal"]
 """Literal type for Zodiac Types"""

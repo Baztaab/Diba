@@ -3,11 +3,10 @@
 Vedic house helpers (whole-sign).
 
 Port reference:
-    PyJHora - docs/jhora/horoscope/chart/charts.py (rasi chart uses whole-sign logic)
+    PyJHora whole-sign rasi logic.
 """
 
-from typing import List, Dict
-
+from typing import Dict, List
 
 _SIGNS = ["Ari", "Tau", "Gem", "Can", "Leo", "Vir", "Lib", "Sco", "Sag", "Cap", "Aqu", "Pis"]
 

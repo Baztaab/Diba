@@ -3,8 +3,10 @@
 This is part of Diba (C) 2025 Giacomo Battaglia
 """
 
-from pydantic import Field
 from typing import Optional
+
+from pydantic import Field
+
 from diba.schemas.kr_models import SubscriptableBaseModel
 
 

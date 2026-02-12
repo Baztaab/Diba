@@ -1,6 +1,4 @@
-import swisseph as swe
-
-from diba.vedic.context import VedicCalculationContext, PLANET_FLAGS, ASC_FLAGS
+from diba.vedic.context import ASC_FLAGS, PLANET_FLAGS, VedicCalculationContext, swe
 from diba.vedic.registry import resolve_ayanamsa, resolve_house_system
 
 

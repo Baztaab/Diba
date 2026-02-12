@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+
 import pytest
 
 from diba.vedic import builder
@@ -44,8 +45,10 @@ def test_no_western_factory_imports_in_vedic_runtime() -> None:
 def test_build_vedic_payload_raises_under_pytest(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("PYTEST_CURRENT_TEST", "1")
     with pytest.raises(RuntimeError):
-        with pytest.warns(DeprecationWarning):            builder.build_vedic_payload()
+        with pytest.warns(DeprecationWarning):
+            builder.build_vedic_payload()
     monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
     monkeypatch.setenv("BAZTAB_STRICT", "1")
     with pytest.raises(RuntimeError):
-        with pytest.warns(DeprecationWarning):            builder.build_vedic_payload()
+        with pytest.warns(DeprecationWarning):
+            builder.build_vedic_payload()

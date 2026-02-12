@@ -14,10 +14,10 @@ Using these constants instead of magic strings/numbers improves maintainability
 and reduces the risk of typos.
 """
 
-from diba.schemas.kr_literals import AstrologicalPoint
-from diba.schemas.kr_models import ActiveAspect
 from typing import List
 
+from diba.schemas.kr_literals import AstrologicalPoint
+from diba.schemas.kr_models import ActiveAspect
 
 # =============================================================================
 # ZODIAC TYPE CONSTANTS

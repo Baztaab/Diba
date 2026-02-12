@@ -23,10 +23,10 @@ Notes:
 - Contract: Registry IDs are stable; changes require a versioned policy update.
 """
 
-from enum import Enum
 from dataclasses import dataclass
-from typing import Optional, Literal
+from enum import Enum
 from types import MappingProxyType
+from typing import Literal, Optional
 
 
 class HouseFetchPlan(str, Enum):

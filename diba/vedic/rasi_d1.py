@@ -3,13 +3,12 @@
 Vedic Rasi (D1) helpers.
 
 Port reference:
-    PyJHora - docs/jhora/horoscope/chart/charts.py (rasi_chart)
+    PyJHora rasi_chart logic.
 """
 
 from typing import Dict
 
 from diba.schemas.kr_models import VedicRasiPointModel
-
 
 _SIGNS = ["Ari", "Tau", "Gem", "Can", "Leo", "Vir", "Lib", "Sco", "Sag", "Cap", "Aqu", "Pis"]
 

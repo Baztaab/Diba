@@ -1,6 +1,4 @@
-import swisseph as swe
-
-from diba.vedic.context import VedicCalculationContext
+from diba.vedic.context import VedicCalculationContext, swe
 from diba.vedic.registry import (
     HouseFetchPlan,
     HouseSystemSpec,

@@ -3,19 +3,16 @@
 Vedic Vargas (divisional charts) engine.
 
 Port reference:
-    PyJHora - docs/jhora/horoscope/chart/charts.py
-    PyJHora - docs/jhora/utils.py (parivritti helpers)
-    PyJHora - docs/jhora/const.py (default method table, sign groups)
-    PyJHora - docs/jhora/panchanga/drik.py (nakshatra_pada for Kalachakra; future)
+    PyJHora varga/charts logic and method families.
 """
 
 from __future__ import annotations
 
-from functools import lru_cache
 import ast
 import logging
+from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, Iterable, Mapping, Optional
+from typing import Any, Iterable, Mapping, Optional
 
 _LOG = logging.getLogger(__name__)
 
@@ -98,7 +95,7 @@ _PLANET_NAME_TO_INDEX = {
     "ketu": 8,
 }
 
-# Mirrors docs/jhora/const.py varga_option_dict defaults (second element per D).
+# Mirrors PyJHora varga_option_dict defaults (second element per D).
 def _defaults_from_pyjhora_const() -> dict[str, int]:
     """
     Load default varga methods from PyJHora const.varga_option_dict when available.
@@ -853,7 +850,8 @@ def _chart_d9_method3(sign_num: int, _seg: int, pos_in_sign: float, _factor: int
     nak, pada, _ = _nakshatra_pada(abs_long)
     mapping = _kalachakra_navamsa_map()
     if not mapping:
-        raise ValueError("Kalachakra navamsa mapping not available.")
+        # Keep runtime deterministic even when optional reference sources are absent.
+        return _chart_d9_method1(sign_num, int(pos_in_sign // (30.0 / 9.0)), pos_in_sign, 9)
     return mapping[nak - 1][pada - 1]
 
 

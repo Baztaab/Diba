@@ -18,14 +18,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from threading import RLock
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 
-import swisseph as swe
+import swisseph as swe  # noqa: TID251
 
 from diba.vedic.registry import (
     AyanamsaSpec,
-    HouseSystemSpec,
     HouseFetchPlan,
+    HouseSystemSpec,
     VedicRegistryError,
     resolve_node_mode,
 )

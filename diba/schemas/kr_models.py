@@ -27,30 +27,31 @@ access to fields while maintaining Pydantic validation.
 This is part of Diba (C) 2025 Giacomo Battaglia
 """
 
-from typing import Union, Optional, List, Literal
-from typing_extensions import TypedDict
-from pydantic import BaseModel, Field, ConfigDict
-from diba.schemas.kr_literals import AspectName
+from typing import List, Literal, Optional, Union
 
-from diba.schemas import (
+from pydantic import BaseModel, ConfigDict, Field
+from typing_extensions import TypedDict
+
+from diba.schemas.kr_literals import (
+    AspectMovementType,
+    AspectName,
+    AstrologicalPoint,
+    Element,
+    Houses,
+    HousesSystemIdentifier,
     LunarPhaseEmoji,
     LunarPhaseName,
-    AstrologicalPoint,
-    Houses,
-    Quality,
-    Element,
-    Sign,
-    ZodiacType,
-    SignNumbers,
-    PointType,
-    SiderealMode,
-    HousesSystemIdentifier,
-    SignsEmoji,
-    RelationshipScoreDescription,
     PerspectiveType,
-    AspectMovementType,
+    PointType,
+    Quality,
+    RelationshipScoreDescription,
+    ReturnType,
+    SiderealMode,
+    Sign,
+    SignNumbers,
+    SignsEmoji,
+    ZodiacType,
 )
-from diba.schemas.kr_literals import ReturnType
 
 
 class SubscriptableBaseModel(BaseModel):

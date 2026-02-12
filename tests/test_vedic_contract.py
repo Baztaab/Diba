@@ -1,12 +1,14 @@
+from dataclasses import FrozenInstanceError  # For strict immutability check
+
 import pytest
-from dataclasses import FrozenInstanceError # For strict immutability check
 
 from diba.vedic.registry import (
-    resolve_ayanamsa,
-    resolve_house_system,
     HouseFetchPlan,
     VedicRegistryError,
+    resolve_ayanamsa,
+    resolve_house_system,
 )
+
 
 def test_registry_ayanamsa_resolution():
     """Verify correct resolution and mapping of Ayanamsa modes."""
