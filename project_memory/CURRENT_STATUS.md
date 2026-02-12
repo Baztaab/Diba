@@ -5,14 +5,20 @@ Last updated: 2026-02-13
 ## Snapshot
 
 - Phase-1 modular foundation is implemented across `core`, `infra`, `domain`, capability namespaces, API facades, serializers, and CLI command stubs.
-- Baseline quality checks are green after foundation work:
-  - `ruff check diba tests`
-  - `pytest -q` (78 passed)
-- Before final Phase-1 commit, two critical hardening actions were required:
-  1. ADR Addendum-B for Engine + VedicState data flow.
-  2. SwissEph containment guardrail upgrade against alias/from-import/dynamic import bypass.
+- ADR Addendum-B for Engine + VedicState is added in docs and project memory.
+- SwissEph containment guardrail is upgraded to block:
+  - alias import
+  - from-import
+  - `importlib.import_module("swisseph")`
+  - `__import__("swisseph")`
+- State-setter boundary is enforced at `diba/infra/swisseph/session.py`.
 
-## Current Commit Readiness
+## Verification
 
-- Both required hardening actions are now implemented in working tree.
-- Repo is ready for Phase-1 commit with enforceable boundaries.
+- `ruff check diba tests` -> pass
+- `pytest -q` -> 78 passed
+
+## Commit Status
+
+- Phase-1 committed as `035c11c` with message:
+  - `Phase 1: modular foundation + enforceable guardrails`

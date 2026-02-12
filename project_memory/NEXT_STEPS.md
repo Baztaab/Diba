@@ -2,18 +2,28 @@
 
 Last updated: 2026-02-13
 
-## Pre-commit hardening items for Phase-1
+## Phase-2 Execution Plan
 
-1. Add ADR Addendum-B for Engine + VedicState and store it in docs + project memory.
-2. Upgrade SwissEph guardrail tests to block bypass paths:
-- alias import
-- from-import
-- `importlib.import_module("swisseph")`
-- `__import__("swisseph")`
-- enforce `set_*` usage only in `diba/infra/swisseph/session.py`
+1. Implement concrete `DibaEngine` API with explicit session lifecycle options:
+- `compute_once(...)` with internal short session
+- `with engine.session():` for batch throughput
+- state reuse when session is already active
 
-## After Phase-1 commit (Phase-2)
+2. Implement `VedicState` as canonical shared output container:
+- positions
+- houses
+- flags
+- context metadata
+- request-scoped cache keys bound to runtime policy
 
-1. Implement `DibaEngine` and `VedicState` in code.
-2. Wire `chart/dasha/panchanga/transit/compatibility` services to consume shared state outputs.
-3. Keep compute path centralized through engine/session boundaries for high-throughput batch flows.
+3. Wire capability services to consume shared engine/state outputs:
+- `diba/chart/service.py`
+- `diba/dasha/service.py`
+- `diba/panchanga/service.py`
+- `diba/transit/service.py`
+- `diba/compatibility/service.py`
+
+4. Add focused acceptance tests for engine/state wiring:
+- repeated capability calls reuse cached primitives
+- no direct ephemeris path in capability modules
+- deterministic meta digest propagation through service outputs
