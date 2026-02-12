@@ -3,15 +3,12 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
-ALLOWED_FILES = {
-    "diba/vedic/context.py",
+SWISSEPH_IMPORT_ALLOWLIST = {
+    "diba/infra/swisseph/session.py",
 }
 
-FORBIDDEN_ATTR_PREFIX = "set_"
-FORBIDDEN_NAMES = {
-    "set_sid_mode",
-    "set_topo",
-    "set_ephe_path",
+SWISSEPH_SETTER_ALLOWLIST = {
+    "diba/infra/swisseph/session.py",
 }
 
 
@@ -28,8 +25,7 @@ def _constant_str(node: ast.AST) -> str | None:
     return None
 
 
-def _is_dynamic_swisseph_import(call: ast.Call) -> bool:
-    # importlib.import_module("swisseph")
+def _is_swisseph_dynamic_import(call: ast.Call) -> bool:
     if (
         isinstance(call.func, ast.Attribute)
         and isinstance(call.func.value, ast.Name)
@@ -40,7 +36,6 @@ def _is_dynamic_swisseph_import(call: ast.Call) -> bool:
     ):
         return True
 
-    # __import__("swisseph")
     if (
         isinstance(call.func, ast.Name)
         and call.func.id == "__import__"
@@ -52,60 +47,69 @@ def _is_dynamic_swisseph_import(call: ast.Call) -> bool:
     return False
 
 
-def test_no_swisseph_import_or_state_calls_outside_allowed_modules():
+def test_swisseph_containment_and_state_setter_rules():
     root = Path(__file__).resolve().parents[1]
     offenders: list[str] = []
 
     for path in _iter_py_files(root / "diba"):
         rel = str(path.relative_to(root)).replace("\\", "/")
-        if rel in ALLOWED_FILES:
-            continue
-
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=rel)
 
-        swisseph_module_aliases: set[str] = set()
-        swisseph_imported_names: set[str] = set()
+        module_aliases: set[str] = set()
+        imported_names: set[str] = set()
+        dynamic_aliases: set[str] = set()
 
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
                 for alias in node.names:
                     if alias.name == "swisseph":
-                        swisseph_module_aliases.add(alias.asname or alias.name)
-                        offenders.append(f"{rel}:{node.lineno}: forbidden import 'import swisseph'")
+                        module_aliases.add(alias.asname or alias.name)
+                        if rel not in SWISSEPH_IMPORT_ALLOWLIST:
+                            offenders.append(f"{rel}:{node.lineno}: forbidden import swisseph")
 
             elif isinstance(node, ast.ImportFrom) and node.module == "swisseph":
                 for alias in node.names:
                     if alias.name == "*":
-                        offenders.append(f"{rel}:{node.lineno}: forbidden 'from swisseph import *'")
+                        offenders.append(f"{rel}:{node.lineno}: forbidden from swisseph import *")
                     else:
-                        swisseph_imported_names.add(alias.asname or alias.name)
-                        offenders.append(
-                            f"{rel}:{node.lineno}: forbidden import 'from swisseph import {alias.name}'"
-                        )
+                        imported_names.add(alias.asname or alias.name)
+                        if rel not in SWISSEPH_IMPORT_ALLOWLIST:
+                            offenders.append(
+                                f"{rel}:{node.lineno}: forbidden from swisseph import {alias.name}"
+                            )
+
+            elif isinstance(node, ast.Assign) and isinstance(node.value, ast.Call):
+                if _is_swisseph_dynamic_import(node.value):
+                    for target in node.targets:
+                        if isinstance(target, ast.Name):
+                            dynamic_aliases.add(target.id)
+                    if rel not in SWISSEPH_IMPORT_ALLOWLIST:
+                        offenders.append(f"{rel}:{node.lineno}: forbidden dynamic swisseph import")
+
+            elif isinstance(node, ast.Call) and _is_swisseph_dynamic_import(node):
+                if rel not in SWISSEPH_IMPORT_ALLOWLIST:
+                    offenders.append(f"{rel}:{node.lineno}: forbidden dynamic swisseph import")
+
+        swisseph_like_names = module_aliases | dynamic_aliases | {"swe", "swisseph"}
 
         for node in ast.walk(tree):
             if not isinstance(node, ast.Call):
                 continue
 
-            if _is_dynamic_swisseph_import(node):
-                offenders.append(f"{rel}:{node.lineno}: forbidden dynamic swisseph import")
-                continue
-
             fn = node.func
 
-            # Case A: swe.set_sid_mode(...)
             if isinstance(fn, ast.Attribute) and isinstance(fn.value, ast.Name):
-                base = fn.value.id
-                if base in swisseph_module_aliases:
-                    if fn.attr.startswith(FORBIDDEN_ATTR_PREFIX) or fn.attr in FORBIDDEN_NAMES:
-                        offenders.append(f"{rel}:{node.lineno}: forbidden SwissEph state call {base}.{fn.attr}(...)")
+                if fn.value.id in swisseph_like_names and fn.attr.startswith("set_"):
+                    if rel not in SWISSEPH_SETTER_ALLOWLIST:
+                        offenders.append(
+                            f"{rel}:{node.lineno}: forbidden swisseph state setter {fn.value.id}.{fn.attr}(...)"
+                        )
 
-            # Case B: set_sid_mode(...) imported from swisseph
             if isinstance(fn, ast.Name):
-                name = fn.id
-                if name in swisseph_imported_names:
-                    if name.startswith(FORBIDDEN_ATTR_PREFIX) or name in FORBIDDEN_NAMES:
-                        offenders.append(f"{rel}:{node.lineno}: forbidden SwissEph state call {name}(...)")
+                if fn.id in imported_names and fn.id.startswith("set_"):
+                    if rel not in SWISSEPH_SETTER_ALLOWLIST:
+                        offenders.append(
+                            f"{rel}:{node.lineno}: forbidden swisseph state setter {fn.id}(...)"
+                        )
 
-    assert not offenders, "SwissEph usage outside allowed modules:\n" + "\n".join(sorted(set(offenders)))
-
+    assert not offenders, "SwissEph containment violations:\n" + "\n".join(sorted(set(offenders)))

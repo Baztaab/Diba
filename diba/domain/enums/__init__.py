@@ -1,0 +1,2 @@
+"""Domain enum-like constants."""
+

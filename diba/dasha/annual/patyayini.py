@@ -1,0 +1,1 @@
+"""Annual patyayini placeholder."""

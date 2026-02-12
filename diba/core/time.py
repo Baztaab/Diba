@@ -1,0 +1,12 @@
+"""Time conversion helpers."""
+
+from __future__ import annotations
+
+from datetime import datetime
+
+from diba.time_contract import datetime_to_julian
+
+
+def datetime_utc_to_jd(value: datetime) -> float:
+    return float(datetime_to_julian(value))
+

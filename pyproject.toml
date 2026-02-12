@@ -124,7 +124,7 @@ ignore = ["E402", "E501", "E731"]
 [tool.ruff.lint.per-file-ignores]
 "diba/settings/__init__.py" = ["F401", "F403"]
 "diba/schemas/__init__.py" = ["F401", "F403"]
-"diba/vedic/context.py" = ["TID251"]
+"diba/infra/swisseph/session.py" = ["TID251"]
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 "swisseph" = { msg = "Direct swisseph import is forbidden. Use VedicCalculationContext/SwissEph adapter path." }

@@ -1,0 +1,1 @@
+"""Annual varsha narayana placeholder."""

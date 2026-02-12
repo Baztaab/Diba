@@ -4,15 +4,15 @@ Last updated: 2026-02-13
 
 ## Snapshot
 
-- Repo cleaned aggressively to Vedic-focused scope.
-- Legacy/kerykeion-heavy folders removed: `docs/`, `examples/`, `release_notes/`, `scripts/`.
-- Legacy files removed: `CHANGELOG.md`, `DEVELOPMENT.md`, `MIGRATION_V4_TO_V5.md`, `TODO.md`.
-- SwissEph guardrails are in place (Ruff banned import + AST test).
-- Test/lint baseline is green:
-  - `ruff check diba tests` -> pass
-  - `pytest -q` -> 68 passed
+- Phase-1 modular foundation is implemented across `core`, `infra`, `domain`, capability namespaces, API facades, serializers, and CLI command stubs.
+- Baseline quality checks are green after foundation work:
+  - `ruff check diba tests`
+  - `pytest -q` (78 passed)
+- Before final Phase-1 commit, two critical hardening actions were required:
+  1. ADR Addendum-B for Engine + VedicState data flow.
+  2. SwissEph containment guardrail upgrade against alias/from-import/dynamic import bypass.
 
-## Important Note
+## Current Commit Readiness
 
-- Working tree is intentionally dirty right now because cleanup changes are not committed yet.
-
+- Both required hardening actions are now implemented in working tree.
+- Repo is ready for Phase-1 commit with enforceable boundaries.

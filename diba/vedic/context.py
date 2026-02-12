@@ -17,11 +17,11 @@ Notes:
 from __future__ import annotations
 
 from dataclasses import dataclass
-from threading import RLock
 from typing import Any, Dict, Optional
 
-import swisseph as swe  # noqa: TID251
-
+from diba.infra.swisseph import adapter as swe_adapter
+from diba.infra.swisseph import swe
+from diba.infra.swisseph.session import SwissEphSession, set_ephe_path, set_sid_mode
 from diba.vedic.registry import (
     AyanamsaSpec,
     HouseFetchPlan,
@@ -29,8 +29,6 @@ from diba.vedic.registry import (
     VedicRegistryError,
     resolve_node_mode,
 )
-
-_SWE_LOCK = RLock()
 
 # PyJHora-aligned flags for sidereal planet positions
 PLANET_FLAGS = (
@@ -248,23 +246,20 @@ class VedicCalculationContext:
             "ascendant": {},
         }
 
-        with _SWE_LOCK:
+        with SwissEphSession():
             if self.ephe_path:
-                swe.set_ephe_path(self.ephe_path)
+                set_ephe_path(self.ephe_path)
 
             swe_mode = getattr(swe, self.ayanamsa.swe_mode)
-            swe.set_sid_mode(swe_mode, 0.0, 0.0)
+            set_sid_mode(swe_mode, 0.0, 0.0)
 
             try:
-                if hasattr(swe, "get_ayanamsa_ut"):
-                    ayan = float(swe.get_ayanamsa_ut(self.jd_utc))
-                else:
-                    ayan = float(swe.get_ayanamsa(self.jd_utc + swe.deltat(self.jd_utc)))
+                ayan = swe_adapter.get_ayanamsa_ut(self.jd_utc)
                 results["ayanamsa_deg"] = ayan
 
                 # Planets
                 for name, pid in planets.items():
-                    xx, retflag = swe.calc_ut(self.jd_utc, pid, flags=planet_flags)
+                    xx, retflag = swe_adapter.calc_ut(self.jd_utc, pid, flags=planet_flags)
                     lon = _norm360(float(xx[0]))
                     speed = float(xx[3])
                     results["planets"][name] = {
@@ -276,7 +271,7 @@ class VedicCalculationContext:
 
                 # Nodes (Rahu/Ketu)
                 node_id = getattr(swe, node_spec.swe_node)
-                rahu_xx, rahu_ret = swe.calc_ut(self.jd_utc, node_id, flags=planet_flags)
+                rahu_xx, rahu_ret = swe_adapter.calc_ut(self.jd_utc, node_id, flags=planet_flags)
                 rahu_lon = _norm360(float(rahu_xx[0]))
                 rahu_speed = float(rahu_xx[3])
                 ketu_lon = _norm360(rahu_lon + 180.0)
@@ -299,7 +294,9 @@ class VedicCalculationContext:
                     if self.house_system.swe_hsys_code
                     else ASC_HSYS
                 )
-                cusps, ascmc = swe.houses_ex(self.jd_utc, self.lat, self.lon, hsys_code, flags=ASC_FLAGS)
+                cusps, ascmc = swe_adapter.houses_ex(
+                    self.jd_utc, self.lat, self.lon, hsys_code, flags=ASC_FLAGS
+                )
                 asc_lon = _norm360(float(ascmc[0]))
                 kp_cusps = [_norm360(float(c)) for c in cusps]
                 results["ascendant"]["longitude"] = asc_lon
@@ -320,6 +317,6 @@ class VedicCalculationContext:
                 if self.house_system.fetch_plan == HouseFetchPlan.HOUSES_EX:
                     results["ascendant"]["cusps"] = [t["cusp"] for t in triplets]
             finally:
-                swe.set_sid_mode(BASELINE_SID_MODE, 0.0, 0.0)
+                set_sid_mode(BASELINE_SID_MODE, 0.0, 0.0)
 
         return results
