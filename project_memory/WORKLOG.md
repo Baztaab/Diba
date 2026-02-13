@@ -145,3 +145,13 @@
 - Identified highest-priority gap: ephemeris runtime contract exists but is not yet wired into the canonical engine orchestration path.
 - Recommended next step: wire initialize_ephemeris_runtime(...) in diba/engine/state.py, then implement Action-2 benchmark harness (diba bench d1 --n 1000).
 
+
+## 2026-02-13 19:28:07
+
+- Wire ephemeris runtime init into canonical engine path; validated.
+- Added canonical-path wiring tests: tests/test_engine_ephemeris_wiring.py.
+- Implemented benchmark harness command: diba bench state-base --n <N>.
+- Added benchmark CLI tests: tests/test_cli_bench.py.
+- ruff check diba tests: pass.
+- pytest -q: pass (97 tests).
+
