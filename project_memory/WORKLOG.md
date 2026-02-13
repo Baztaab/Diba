@@ -130,3 +130,10 @@
 - ruff check diba tests: pass.
 - pytest -q: pass (89 tests).
 
+
+## 2026-02-13 18:23:09
+
+- Action 1: ephemeris runtime contract enforced + tests added (T1/T2/T3), validation ok.
+- ruff check diba tests: pass.
+- pytest -q: pass (92 tests).
+
