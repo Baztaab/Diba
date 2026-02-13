@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, Optional
@@ -9,8 +11,9 @@ from typing import Any, Dict, Optional
 import pytz
 from pytz.exceptions import AmbiguousTimeError, NonExistentTimeError, UnknownTimeZoneError
 
+from diba.core.contracts import DEFAULT_EPHE_EXPECTATIONS
 from diba.domain.models.common import BirthData
-from diba.infra.io.ephemeris import resolve_ephemeris_path
+from diba.infra.io.ephemeris import initialize_ephemeris_runtime
 from diba.time_contract import datetime_to_julian
 from diba.vedic.context import VedicCalculationContext
 from diba.vedic.factory import VedicFactoryError
@@ -23,6 +26,9 @@ class AstronomyContext:
 
     ephe_path: Optional[str] = None
     include_outer: bool = False
+    ephe_expectations: str = DEFAULT_EPHE_EXPECTATIONS
+    config_digest: Optional[str] = None
+    dev_mode: bool = True
 
 
 @dataclass(frozen=True)
@@ -95,6 +101,16 @@ def _to_jd_ut(birth: BirthData) -> float:
     return float(datetime_to_julian(utc_dt))
 
 
+def _build_ephemeris_config_digest(astronomy_context: AstronomyContext) -> str:
+    payload = {
+        "configured_ephe_path": astronomy_context.ephe_path or "",
+        "ephe_expectations": astronomy_context.ephe_expectations,
+        "dev_mode": bool(astronomy_context.dev_mode),
+    }
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
 def build_vedic_state(
     birth_data: BirthData,
     astronomy_context: AstronomyContext,
@@ -109,9 +125,12 @@ def build_vedic_state(
     house_system = resolve_house_system(astrology_settings.house_system_id)
     node_mode = resolve_node_mode(astrology_settings.node_mode)
 
-    effective_ephe_path = resolve_ephemeris_path(
-        cli_arg=astronomy_context.ephe_path,
-        dev_mode=True,
+    runtime_digest = astronomy_context.config_digest or _build_ephemeris_config_digest(astronomy_context)
+    effective_ephe_path = initialize_ephemeris_runtime(
+        config_digest=runtime_digest,
+        ephe_expectations=astronomy_context.ephe_expectations,
+        configured_path=astronomy_context.ephe_path,
+        dev_mode=bool(astronomy_context.dev_mode),
     )
 
     context = VedicCalculationContext(

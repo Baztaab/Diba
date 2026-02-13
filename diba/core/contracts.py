@@ -5,6 +5,8 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 
+DEFAULT_EPHE_EXPECTATIONS = "de405/sepl_18"
+
 
 @dataclass(frozen=True)
 class ToleranceProfile:
