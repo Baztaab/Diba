@@ -24,6 +24,8 @@ Phase-1 modular foundation is in place and guardrails exist for SwissEph usage. 
 - if a SwissEph session is already active, reuse it.
 - if no active session exists, create a short session for a single call.
 - for high-throughput batches, expose context-manager usage such as `with engine.session():` to keep one session open across many computations.
+- `DibaEngine` is the single owner of session lifecycle in the canonical runtime path.
+- `VedicCalculationContext` may keep compatibility mode, but in engine path it must run with `manage_session=False`.
 
 4. Module boundary rule:
 - `diba.chart`, `diba.dasha`, `diba.panchanga`, `diba.transit`, `diba.compatibility` must consume computed data via `DibaEngine` and `VedicState`.

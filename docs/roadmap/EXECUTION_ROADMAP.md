@@ -13,6 +13,7 @@ This roadmap is aligned with project policies and architecture constraints:
 1. Canonical research/artifact root is `D:\Diba\project_memory\...`.
 2. Repo-relative mirror (`project_memory/...`) is maintained for review and CI traceability.
 3. No capability implementation starts before its research artifact exists in canonical path.
+4. Canonical/mirror drift is disallowed and must fail CI.
 
 ## 1) Priority Ranking (P0/P1/P2)
 
@@ -337,3 +338,21 @@ Breaking-change policy:
 - No mock/monkeypatch in tests.
 - SwissEph usage only through existing session/adapter boundary.
 - Docstring lint remains green under enforced policy.
+
+## CI Enforcement Matrix
+
+- Research gate enforcement:
+  - `tests/test_policy_research_gate.py`
+- Canonical/mirror sync enforcement:
+  - `tests/test_memory_sync_contract.py`
+- Session ownership enforcement:
+  - `tests/test_session_ownership_contract.py`
+  - `tests/test_engine_thread_session_isolation.py`
+- Tolerance profile mechanism contract:
+  - `diba/core/contracts.py` + tests
+
+## Plugin Runtime Policy (Locked)
+
+- Default runtime policy: fail-soft on incompatible plugin (skip plugin + warning, keep core alive).
+- Strict mode policy: explicit flag/env enables fail-hard behavior.
+- Capability negotiation is required before plugin execution.

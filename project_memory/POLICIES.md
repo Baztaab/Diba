@@ -32,6 +32,12 @@
 - فایل تحقیق در `project_memory\research\...` وجود داشته باشد.
 - و تست‌های مرتبط (حداقل boundary + regression) اضافه شده باشند.
 
+### گیت اجرایی (Machine-Enforced)
+
+- Rule قابل enforce در CI: اگر capabilityهای تعریف‌شده در ریپو وجود/تغییر داشته باشند، research artifactهای متناظر باید در `project_memory/research/` موجود باشند و حداقل ساختار الزامی را داشته باشند.
+- تست enforce:
+  - `tests/test_policy_research_gate.py`
+
 ## Policy: Docstring Standard (PEP 257 + Google Style, Enforced)
 
 تمام docstringها باید هم‌زمان:
@@ -69,3 +75,26 @@ def fn(x: int, y: int) -> int:
 - Ruff باید قواعد docstring را با `pydocstyle` enforce کند.
 - Convention باید `google` باشد تا قالب بخش‌ها یکدست و lint-friendly بماند.
 - تنظیمات enforce در `pyproject.toml` نگه‌داری می‌شود.
+
+## Policy: Canonical/Mirror Sync (Mandatory)
+
+- منبع حقیقت برای حافظه پروژه: `project_memory/...` (و در سیستم فایل همان مسیر مطلق `D:\\Diba\\project_memory\\...`).
+- هر سند mirror در `docs/...` باید با نسخه‌ی متناظر در `project_memory/...` همگام باشد.
+- اختلاف بین canonical و mirror مجاز نیست.
+
+### گیت اجرایی
+
+- تست enforce:
+  - `tests/test_memory_sync_contract.py`
+
+## Policy: Session Ownership (Mandatory)
+
+- مالک lifecycle سشن محاسباتی: `DibaEngine`.
+- `VedicCalculationContext` لایه محاسبه است و در مسیر engine باید با `manage_session=False` مصرف شود.
+- هرگونه state سشن روی objectهای اشتراکی (engine/context) ممنوع است.
+
+### گیت اجرایی
+
+- تست enforce:
+  - `tests/test_session_ownership_contract.py`
+  - `tests/test_engine_thread_session_isolation.py`

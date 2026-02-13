@@ -1,0 +1,56 @@
+# Runtime Contracts (Schema, Tolerance, Benchmark, Session Ownership)
+
+Last updated: 2026-02-13
+
+## 1) Session Ownership (Single Source of Truth)
+
+- Owner of session lifecycle is `DibaEngine`.
+- `VedicCalculationContext` is calculation runtime and may manage its own session only for backward-compatible direct usage.
+- Engine path must call context with `manage_session=False` under an active engine session.
+
+Enforcement:
+- `tests/test_session_ownership_contract.py`
+- `tests/test_engine_thread_session_isolation.py`
+
+## 2) schema_version vs serializer versions
+
+- `meta.schema_version` is the canonical consumer-facing version and must follow strict SemVer (`MAJOR.MINOR.PATCH`).
+- Serializer module names (`api_v1`, `static_chart_v0_1`) are implementation channels and are not the authoritative schema version by themselves.
+- Mapping rule:
+  - serializer channel declares supported schema major(s)
+  - payload must carry explicit `meta.schema_version`
+
+Breaking policy:
+- MAJOR bump for any breaking schema change.
+- MINOR for additive non-breaking fields/subtrees.
+- PATCH for non-breaking fixes and non-required metadata additions.
+
+## 3) Tolerance profile selection mechanism
+
+- Mechanism: environment variable `DIBA_TOL_PROFILE`.
+- Values:
+  - `ci` => looser tolerances for platform variability
+  - `golden` => strict tolerances for pinned deterministic runs
+- Implementation source: `diba/core/contracts.py`.
+
+## 4) Benchmark governance
+
+- Benchmarks are valid only via defined harness (`benchmarks/` suite or dedicated CLI bench command).
+- Output must include:
+  - machine/CPU identifier
+  - tolerance profile
+  - cold/warm cache flag
+  - ephemeris I/O mode (included/excluded)
+  - sample size, median, p95
+
+Execution policy:
+- CI runs benchmark smoke only (non-blocking performance signal).
+- Full throughput acceptance runs are local/release-gate with declared environment and threshold.
+
+## 5) Research artifact gate
+
+- Any capability implementation requires research artifact existence in `project_memory/research/`.
+- CI enforces mandatory artifact presence and minimum document sections.
+
+Enforcement:
+- `tests/test_policy_research_gate.py`
