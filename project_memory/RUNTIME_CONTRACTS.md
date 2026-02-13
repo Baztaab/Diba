@@ -7,6 +7,7 @@ Last updated: 2026-02-13
 - Owner of session lifecycle is `DibaEngine`.
 - `VedicCalculationContext` is calculation runtime and may manage its own session only for backward-compatible direct usage.
 - Engine path must call context with `manage_session=False` under an active engine session.
+- Session lifecycle rules govern SwissEph global state calls only through existing session boundary modules.
 
 Enforcement:
 - `tests/test_session_ownership_contract.py`
@@ -54,3 +55,16 @@ Execution policy:
 
 Enforcement:
 - `tests/test_policy_research_gate.py`
+
+## 6) Ephemeris policy precedence and re-init scope
+
+- Ephemeris asset/runtime policy precedence is:
+  - `DIBA_EPHE_PATH` (environment override)
+  - configured path in runtime settings
+  - packaged ephemeris path
+  - validated fallback/default policy
+- Re-init conflict applies to ephemeris policy/path/expectations changes inside the same process.
+- Re-init conflict does not redefine SwissEph session flag lifecycle; sidereal/topo/path state calls remain session-bound by containment rules.
+
+Enforcement:
+- `tests/test_ephemeris_runtime_contract.py`
