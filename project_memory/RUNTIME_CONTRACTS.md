@@ -68,3 +68,37 @@ Enforcement:
 
 Enforcement:
 - `tests/test_ephemeris_runtime_contract.py`
+
+## 7) Ayanamsa resolver and fallback policy
+
+- Resolver contract:
+  - `resolve_ayanamsa(mode, on_unsupported, default_id) -> (spec, report)`
+  - resolver does not log
+  - structured `report` carries:
+    - `reason_code` (`none|invalid|disabled|recognized_not_implemented`)
+    - `input_id`
+    - `effective_id`
+    - `was_fallback`
+- Fallback behavior:
+  - `on_unsupported="raise"`: fail-fast for invalid/disabled/recognized-not-implemented
+  - `on_unsupported="fallback_default"`: fallback for all three reason classes
+  - if `default_id` cannot resolve, resolver must raise (internal misconfiguration)
+- Logging scope:
+  - fallback warnings are allowed only at entrypoints (`build_vedic_state` and CLI parse path)
+  - no downstream logging in registry resolver
+
+## 8) Ayanamsa canonicalization and listing
+
+- Canonicalization rule is fixed:
+  - `strip` + `casefold` + replace `-`/space with `_`
+- Alias acceptance is supported at input edges, but canonical IDs are emitted in runtime.
+- Deterministic listing:
+  - `list_ayanamsa_ids(selectable_only=True, include_aliases=False)` returns sorted canonical selectable IDs only.
+  - aliases are exposed only when `include_aliases=True`.
+
+## 9) Single-resolve rule
+
+- Runtime ayanamsa resolution is performed only at entrypoints:
+  - `build_vedic_state` (engine canonical path)
+  - CLI parse path
+- Downstream runtime layers must carry `AyanamsaSpec` and must not call `resolve_ayanamsa` again.

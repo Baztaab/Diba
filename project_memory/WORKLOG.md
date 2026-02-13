@@ -155,3 +155,45 @@
 - ruff check diba tests: pass.
 - pytest -q: pass (97 tests).
 
+
+## 2026-02-13 19:55:41
+
+- Ayanamsa extraction research completed against D:\lab\Pyjhora\src\jhora with line-level references.
+- Total mapped/supported ayanamsa keys in const mapping: 21 (const.py:182-192).
+- Custom/computed ayanamsa modes are present: SENTHIL and SUNDAR_SS; SIDM_USER is runtime-user-defined.
+- Order-of-ops finding #1: sidereal planet path uses set_ayanamsa_mode -> FLG_SIDEREAL calc_ut -> reset_ayanamsa_mode (drik.py:223-229).
+- Order-of-ops finding #2: houses/asc paths use set_ayanamsa_mode before swe.houses_ex with FLG_SIDEREAL (drik.py:1439-1441,1453-1455,1487-1489).
+- Order-of-ops finding #3: charts orchestration sets ayanamsa first, then ascendant+dhasavarga (charts.py:97,99,106).
+- Remaining ambiguity/risk #1: SENTHIL/SUNDAR_SS branches compute value but do not call swe.set_sid_mode in branch body (drik.py:136-139).
+- Remaining ambiguity/risk #2: reset_ayanamsa_mode forces LAHIRI for SIDM_USER/SENTHIL/SUNDAR_SS/KP-SENTHIL after calls (drik.py:148-150).
+- Remaining ambiguity/risk #3: drik1 experimental fallback warning text and actual fallback mode are inconsistent (drik1.py:258-259).
+- Coverage proof: required pattern scans completed; union of 75 matched files categorized with no uncovered file.
+
+## 2026-02-14 00:40:55
+
+- Strict recheck patch applied for PyJHora ayanamsa research docs.
+- Added missed coverage: panchanga/info.py get_ayanamsa consumer and extra set_ayanamsa_mode call-site reconciliation.
+- Updated logic doc with corrected Horoscope wiring semantics and UI-mode propagation gaps.
+- Synced canonical and mirror research files for inventory/set-logic/coverage.
+## 2026-02-14 01:54:22
+
+- Implemented locked Ayanamsa plan delta: resolver now returns (spec, report) with reason-code taxonomy and fallback policy.
+- Added canonicalization contract (strip/casefold/hyphen-space normalization), alias acceptance, deterministic selectable listing, and non-selectable SIDM_USER quarantine.
+- Added entrypoint-only fallback logging in engine state and CLI parse paths; resolver remains side-effect free.
+- Introduced generated canonical enum flow: tools/gen_ayanamsa_enum.py + diba/domain/enums/generated_ayanamsa_enum.py.
+- Updated schema surfaces to canonicalize aliases before enum validation (BeforeValidator + AyanamsaIdEnum).
+- Baseline sidereal restore now derives from default ayanamsa contract, not hardcoded literal.
+- Added new test suites: registry contract, disabled modes, runtime wiring, restore contract, codegen sync, PyJHora coverage exception table.
+- Synced runtime contract docs mirror and added PyJHora inventory exception table.
+- ruff check diba tests: pass.
+- pytest -q: pass (110 tests).
+## 2026-02-14 02:03:12
+
+- Final review checklist enforced for Ayanamsa hardening.
+- Confirmed ResolveReport semantics use `effective_id` as post-fallback effective mode.
+- Enforced single-resolve runtime rule: `resolve_ayanamsa` call sites in diba are now limited to CLI parse and engine state entrypoint (plus registry internals).
+- Added guard tests: `tests/test_ayanamsa_single_resolve_rule.py` and `tests/test_research_mirror_pointer_headers.py`.
+- Added explicit Mirror/Pointer headers for docs/research ayanamsa files.
+- Updated runtime contracts with single-resolve rule.
+- ruff check diba tests tools: pass.
+- pytest -q: pass (112 tests).
