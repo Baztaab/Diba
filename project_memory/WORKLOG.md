@@ -42,3 +42,11 @@
 - Validation complete: ruff pass, pytest pass (82 tests).
 - Commit recorded: 7ea238f.
 
+
+## 2026-02-13 06:59:50
+
+- Enabled Ruff docstring enforcement (pydocstyle/google) in CI configuration.
+- Added concurrency hard-check: tests/test_engine_thread_session_isolation.py to verify no cross-thread session leakage.
+- Added/updated docstrings in active Phase-2 modules to satisfy enforcement without wide refactor.
+- Validation complete: ruff pass, pytest pass (83 tests).
+
