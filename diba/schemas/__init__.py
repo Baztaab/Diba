@@ -9,7 +9,6 @@ from .kr_literals import (
     AspectMovementType,
     AspectName,
     AstrologicalPoint,
-    AxialCusps,
     ChartType,
     CompositeChartType,
     DibaChartLanguage,
@@ -21,8 +20,6 @@ from .kr_literals import (
     LunarPhaseEmoji,
     LunarPhaseName,
     PerspectiveType,
-    # Deprecated aliases
-    Planet,
     PointType,
     Quality,
     RelationshipScoreDescription,
@@ -81,9 +78,6 @@ __all__ = [
     "RelationshipScoreDescription",
     "CompositeChartType",
     "AspectName",
-    # Deprecated aliases (for v4.x compatibility, will be removed in v6.0)
-    "Planet",
-    "AxialCusps",
     # Main Model Classes (from kr_models)
     "SubscriptableBaseModel",
     "LunarPhaseModel",

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Translation strings extracted from the legacy JSON configuration.
+"""Translation strings extracted from the project JSON configuration.
 
 This module exposes the `LANGUAGE_SETTINGS` dictionary used across the project.
 """

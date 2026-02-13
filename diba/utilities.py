@@ -144,8 +144,8 @@ def normalize_zodiac_type(value: str) -> ZodiacType:
     """
     Normalize a zodiac type string to its canonical representation.
 
-    Handles case-insensitive matching and legacy formats like "tropic" or "Tropic",
-    automatically converting them to the canonical forms "Tropical" or "Sidereal".
+    Handles case-insensitive matching and converts to canonical forms
+    "Tropical" or "Sidereal".
 
     Args:
         value: Input zodiac type string (case-insensitive).
@@ -159,21 +159,19 @@ def normalize_zodiac_type(value: str) -> ZodiacType:
     Examples:
         >>> normalize_zodiac_type("tropical")
         'Tropical'
-        >>> normalize_zodiac_type("Tropic")
-        'Tropical'
         >>> normalize_zodiac_type("SIDEREAL")
         'Sidereal'
     """
     value_lower = value.lower()
 
-    if value_lower in ("tropical", "tropic"):
+    if value_lower == "tropical":
         return cast(ZodiacType, "Tropical")
     elif value_lower == "sidereal":
         return cast(ZodiacType, "Sidereal")
     else:
         raise ValueError(
             "'{value}' is not a valid zodiac type. Accepted values are: Tropical, Sidereal "
-            "(case-insensitive, 'tropic' also accepted as legacy).".format(value=value)
+            "(case-insensitive).".format(value=value)
         )
 
 

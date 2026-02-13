@@ -7,8 +7,8 @@ RESEARCH_RULES: dict[str, dict[str, list[str]]] = {
         "paths": [
             "diba/engine/state.py",
             "diba/chart/service.py",
-            "diba/serializers/static_chart_v0_1.py",
             "diba/serializers/api_v1.py",
+            "diba/domain/models/common.py",
         ],
         "artifacts": [
             "project_memory/research/phase-a-astronomy-base-pyjhora-extract.md",

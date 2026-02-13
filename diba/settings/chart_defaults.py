@@ -2,7 +2,7 @@
 Default settings and presets used by chart generation and calculation routines.
 
 This module centralizes the static values that were previously stored in
-`diba.settings.legacy`. Keeping them here avoids scattering hard-coded
+older settings modules. Keeping them here avoids scattering hard-coded
 configuration across the codebase while still exposing them for reuse.
 """
 

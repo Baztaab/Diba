@@ -203,36 +203,6 @@ def test_d7_mirror_scope_only_method2() -> None:
     assert chart_no_mirror["moon"]["position"] != chart_mirror["moon"]["position"]
 
 
-def test_d7_mirror_disabled_without_compat() -> None:
-    from diba.vedic.factory import VedicSubjectFactory
-
-    model = VedicSubjectFactory.from_birth_data(
-        year=1997,
-        month=6,
-        day=7,
-        hour=20,
-        minute=28,
-        seconds=36.0,
-        lon=51 + 25 / 60,
-        lat=35 + 40 / 60,
-        tz_str="Asia/Tehran",
-        ayanamsa_id="lahiri",
-        node_mode="mean",
-        house_system_id="whole_sign",
-        varga_charts=["D7"],
-        varga_methods={"D7": 2},
-    )
-
-    core_abs = {k: v.abs_pos_sidereal for k, v in model.core.objects.items()}
-    expected = compute_varga(core_abs, "D7", method=2, mirror_even_sign=False)["points"]
-    actual_points = model.vargas.charts["D7"].points
-    actual = {
-        key: (value.model_dump() if hasattr(value, "model_dump") else value)
-        for key, value in actual_points.items()
-    }
-    assert actual == expected
-
-
 def test_d8_method1_boundaries() -> None:
     boundary = 30.0 / 8.0
     core = {

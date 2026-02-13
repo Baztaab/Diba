@@ -1,1 +1,0 @@
-"""Khanda Khadyaka experimental placeholder."""

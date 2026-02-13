@@ -670,11 +670,6 @@ class DualChartAspectsModel(SubscriptableBaseModel):
     active_aspects: List["ActiveAspect"] = Field(description="List of active aspects with their orb settings.")
 
 
-# Legacy aliases for backward compatibility
-NatalAspectsModel = SingleChartAspectsModel
-SynastryAspectsModel = DualChartAspectsModel
-
-
 class TransitsTimeRangeModel(SubscriptableBaseModel):
     """
     Model representing a collection of transit moments for an astrological subject.

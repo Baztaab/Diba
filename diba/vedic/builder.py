@@ -8,8 +8,6 @@ This module is intentionally pure assembly:
 
 from __future__ import annotations
 
-import os
-import warnings
 from typing import Any, Mapping, Optional
 
 from diba.schemas.kr_models import (
@@ -73,25 +71,4 @@ def build_vedic_model(
         core=core_model,
         rasi_d1=rasi_d1,
         vargas=vargas,
-    )
-
-
-def build_vedic_payload(*_args: Any, **_kwargs: Any) -> None:
-    """
-    Retired legacy API: build_vedic_payload.
-
-    This must never be used in runtime. It remains only to fail fast and guide
-    callers toward VedicSubjectFactory/build_vedic_model.
-    """
-    warnings.warn(
-        "build_vedic_payload is retired; use VedicSubjectFactory/build_vedic_model instead.",
-        DeprecationWarning,
-        stacklevel=2,
-    )
-    if os.getenv("BAZTAB_STRICT") == "1" or os.getenv("PYTEST_CURRENT_TEST"):
-        raise RuntimeError(
-            "build_vedic_payload is retired; use VedicSubjectFactory/build_vedic_model instead."
-        )
-    raise RuntimeError(
-        "build_vedic_payload is retired; use VedicSubjectFactory/build_vedic_model instead."
     )
