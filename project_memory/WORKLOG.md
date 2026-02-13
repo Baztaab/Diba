@@ -27,3 +27,18 @@
 - Committed Phase-1 as 035c11c.
 - Updated CURRENT_STATUS and NEXT_STEPS for Phase-2 engine/state wiring.
 
+
+## 2026-02-13 06:41:45
+
+- Started Phase-2 implementation (Engine/State + state-based capability wiring + ephemeris SRE hardening).
+- Locked key constraint: SwissEph containment allowlist remains unchanged; no new swisseph imports outside existing boundary.
+- Planned scope includes contextvar-based stateless engine session control and strict base-only VedicState.
+
+
+## 2026-02-13 06:45:19
+
+- Completed Phase-2 implementation: stateless Engine/State, state-based service wiring, ephemeris fail-fast policy.
+- Added tests for engine re-entrant session semantics and ephemeris env policy.
+- Validation complete: ruff pass, pytest pass (82 tests).
+- Commit recorded: 7ea238f.
+

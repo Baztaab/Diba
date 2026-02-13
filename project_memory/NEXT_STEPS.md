@@ -2,28 +2,23 @@
 
 Last updated: 2026-02-13
 
-## Phase-2 Execution Plan
+## Completed in Phase-2
 
-1. Implement concrete `DibaEngine` API with explicit session lifecycle options:
-- `compute_once(...)` with internal short session
-- `with engine.session():` for batch throughput
-- state reuse when session is already active
+1. Stateless `DibaEngine` with contextvar-based re-entrant session control.
+2. Base-only `VedicState` model and build path.
+3. API-level `ChartAnalysis` aggregation container.
+4. State-based wiring across capability services.
+5. Ephemeris fail-fast policy using `DIBA_EPHE_PATH`.
 
-2. Implement `VedicState` as canonical shared output container:
-- positions
-- houses
-- flags
-- context metadata
-- request-scoped cache keys bound to runtime policy
+## Follow-up Backlog
 
-3. Wire capability services to consume shared engine/state outputs:
-- `diba/chart/service.py`
-- `diba/dasha/service.py`
-- `diba/panchanga/service.py`
-- `diba/transit/service.py`
-- `diba/compatibility/service.py`
+1. Replace placeholder metadata values (`swisseph_version`, `config_digest`) with deterministic runtime values.
+2. Extend `ChartAnalysis` orchestration flow in API facade functions.
+3. Add dedicated acceptance tests for multi-capability pipelines sharing one engine session.
+4. Continue remaining SRE hardening items once full requirement text is finalized.
 
-4. Add focused acceptance tests for engine/state wiring:
-- repeated capability calls reuse cached primitives
-- no direct ephemeris path in capability modules
-- deterministic meta digest propagation through service outputs
+## Exit Criteria Status
+
+1. No new SwissEph boundary violations: complete.
+2. Lint/test green: complete.
+3. Phase-2 commit recorded in project memory: complete.
