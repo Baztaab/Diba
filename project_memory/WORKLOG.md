@@ -64,3 +64,55 @@
 - uff check diba tests: pass.
 - pytest -q: pass (83 tests).
 
+
+## 2026-02-13 15:50:52
+
+- Post-commit check after project memory roadmap commit (151e084).
+- uff check diba tests: pass.
+- pytest -q: pass (83 tests).
+
+
+## 2026-02-13 15:56:52
+
+- Added enforceable governance locks for roadmap/policy gaps.
+- Added CI tests for research gate, canonical/mirror sync, session ownership contract, and tolerance profile selection.
+- Added runtime contract document and mirrored it in project memory.
+- Added phase research artifact templates for P0/P1/P2 tracks under project_memory/research/.
+- Updated ADR Addendum-B with explicit session single-owner rule.
+- Validation complete: ruff pass, pytest pass (89 tests).
+
+
+## 2026-02-13 16:01:15
+
+- Pre-commit checks for Commit 1 (docs/contracts/policies/roadmap/ADR scope).
+- uff check diba tests: pass.
+- pytest -q: pass (89 tests).
+
+
+## 2026-02-13 16:01:44
+
+- Post-commit checks for Commit 1 (464bd6c).
+- uff check diba tests: pass.
+- pytest -q: pass (89 tests).
+
+
+## 2026-02-13 16:02:02
+
+- Pre-commit checks for Commit 2 (enforcement tests scope).
+- uff check diba tests: pass.
+- pytest -q: pass (89 tests).
+
+
+## 2026-02-13 16:02:31
+
+- Post-commit checks for Commit 2 (4928be0).
+- uff check diba tests: pass.
+- pytest -q: pass (89 tests).
+
+
+## 2026-02-13 16:02:53
+
+- Pre-commit checks for Commit 3 (research artifacts + memory status updates).
+- uff check diba tests: pass.
+- pytest -q: pass (89 tests).
+

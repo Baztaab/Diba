@@ -20,3 +20,5 @@ Last updated: 2026-02-13
 1. Docstring policy enforce in CI: complete.
 2. Concurrency session leak test added: complete.
 3. Lint/tests green: complete.
+
+- گیت‌های policy و artifactهای تحقیق فعال و commit شدند.

@@ -18,3 +18,5 @@ Last updated: 2026-02-13
 
 - `7ea238f` Phase-2 engine/state orchestration and ephemeris policy
 - `6c0fd1f` project memory phase-2 finalization
+
+- گیت‌های policy و artifactهای تحقیق فعال و commit شدند.
