@@ -21,7 +21,12 @@ from typing import Any, Dict, Optional
 
 from diba.infra.swisseph import adapter as swe_adapter
 from diba.infra.swisseph import swe
-from diba.infra.swisseph.session import SwissEphSession, set_ephe_path, set_sid_mode
+from diba.infra.swisseph.session import (
+    SwissEphSession,
+    ensure_session_active,
+    set_ephe_path,
+    set_sid_mode,
+)
 from diba.vedic.registry import (
     AyanamsaSpec,
     HouseFetchPlan,
@@ -193,7 +198,7 @@ class VedicCalculationContext:
     node_mode: str = "mean"
     include_outer: bool = False
 
-    def compute_core(self) -> Dict[str, Any]:
+    def compute_core(self, *, manage_session: bool = True) -> Dict[str, Any]:
         """Compute the canonical core payload using SwissEph.
 
         Produces raw planet, node, ascendant, and house data used by higher
@@ -246,7 +251,7 @@ class VedicCalculationContext:
             "ascendant": {},
         }
 
-        with SwissEphSession():
+        def _compute_under_active_session() -> None:
             if self.ephe_path:
                 set_ephe_path(self.ephe_path)
 
@@ -318,5 +323,12 @@ class VedicCalculationContext:
                     results["ascendant"]["cusps"] = [t["cusp"] for t in triplets]
             finally:
                 set_sid_mode(BASELINE_SID_MODE, 0.0, 0.0)
+
+        if manage_session:
+            with SwissEphSession():
+                _compute_under_active_session()
+        else:
+            ensure_session_active()
+            _compute_under_active_session()
 
         return results

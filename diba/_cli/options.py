@@ -1,9 +1,9 @@
 import argparse
-import os
 from enum import Enum
 from typing import Optional
 
 from diba._cli.errors import ValidationError
+from diba.infra.io.ephemeris import resolve_ephemeris_path as _resolve_ephemeris_path
 from diba.vedic.registry import (
     VedicRegistryError,
     list_ayanamsa_ids,
@@ -80,7 +80,7 @@ def validate_online_requires(online: bool, interactive: bool, city: Optional[str
 
 
 def resolve_ephemeris_path(cli_arg: Optional[str], _offline: bool) -> Optional[str]:
-    return cli_arg or os.getenv("DIBA_EPHE_PATH")
+    return _resolve_ephemeris_path(cli_arg=cli_arg, dev_mode=bool(_offline))
 
 
 def resolve_mode(args) -> tuple[bool, bool]:
