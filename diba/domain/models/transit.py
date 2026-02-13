@@ -8,7 +8,8 @@ from .common import Meta
 
 
 class TransitResult(BaseModel):
+    """Standard result model for transit computations."""
+
     kind: str
     payload: dict
     meta: Meta | None = None
-

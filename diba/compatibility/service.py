@@ -18,6 +18,7 @@ def _meta() -> Meta:
 
 
 def compute_ashtakoota(*, state: VedicState | None = None, **_kwargs) -> CompatibilityResult:
+    """Return compatibility payload using optional shared base state."""
     payload = {"implemented": False, "message": "Compatibility scoring will be expanded incrementally."}
     if state is not None:
         payload["base_location"] = state.location

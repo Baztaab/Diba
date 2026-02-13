@@ -23,6 +23,7 @@ class DibaEngine:
 
     @contextmanager
     def session(self) -> Iterator[None]:
+        """Open a re-entrant session scope bound to the current context."""
         depth = _ENGINE_SESSION_DEPTH.get()
         token = _ENGINE_SESSION_DEPTH.set(depth + 1)
         outer = depth == 0
@@ -37,6 +38,7 @@ class DibaEngine:
             _ENGINE_SESSION_DEPTH.reset(token)
 
     def state(self, birth_data: BirthData) -> VedicState:
+        """Build base computation state for one subject birth input."""
         if _ENGINE_SESSION_DEPTH.get() > 0:
             return build_vedic_state(
                 birth_data,

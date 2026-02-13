@@ -19,12 +19,16 @@ from diba.vedic.registry import resolve_ayanamsa, resolve_house_system, resolve_
 
 @dataclass(frozen=True)
 class AstronomyContext:
+    """Astronomy runtime context values used by engine state builder."""
+
     ephe_path: Optional[str] = None
     include_outer: bool = False
 
 
 @dataclass(frozen=True)
 class AstrologySettings:
+    """Astrology policy identifiers used for one computation flow."""
+
     ayanamsa_id: str = "lahiri"
     house_system_id: str = "whole_sign"
     node_mode: str = "mean"
@@ -32,6 +36,8 @@ class AstrologySettings:
 
 @dataclass(frozen=True)
 class VedicState:
+    """Base-only shared state payload for capability modules."""
+
     birth_data: BirthData
     astronomy_context: AstronomyContext
     astrology_settings: AstrologySettings
@@ -96,6 +102,7 @@ def build_vedic_state(
     *,
     require_active_session: bool,
 ) -> VedicState:
+    """Compute and package canonical base state from birth and runtime settings."""
     jd_ut = _to_jd_ut(birth_data)
 
     ayanamsa = resolve_ayanamsa(astrology_settings.ayanamsa_id)

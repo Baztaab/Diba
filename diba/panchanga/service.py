@@ -35,6 +35,7 @@ def compute(
     *,
     state: VedicState | None = None,
 ) -> PanchangaResult:
+    """Build baseline panchanga payload from provided or computed base state."""
     base_state = state or _state_from_input(birth, policy)
     payload = {
         "implemented": False,

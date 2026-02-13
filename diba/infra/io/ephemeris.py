@@ -11,6 +11,7 @@ _ENV_ENVIRONMENT = "DIBA_ENV"
 
 
 def validate_ephemeris_path(path: str) -> None:
+    """Validate that ephemeris path exists and is a directory."""
     p = Path(path)
     if not p.exists() or not p.is_dir():
         raise RuntimeError(f"Invalid ephemeris path: {path}")
@@ -21,11 +22,13 @@ def _default_dev_cache_path() -> str:
 
 
 def is_prod_environment() -> bool:
+    """Return whether runtime environment is production-like."""
     env = os.getenv(_ENV_ENVIRONMENT, "dev").strip().lower()
     return env in {"prod", "production"}
 
 
 def resolve_ephemeris_path(cli_arg: Optional[str] = None, *, dev_mode: bool = True) -> Optional[str]:
+    """Resolve ephemeris path using env override, CLI, then dev fallback."""
     env_path = os.getenv(_ENV_EPHE)
     if env_path:
         validate_ephemeris_path(env_path)
@@ -42,4 +45,5 @@ def resolve_ephemeris_path(cli_arg: Optional[str] = None, *, dev_mode: bool = Tr
 
 
 def can_auto_download_ephemeris(*, dev_mode: bool, opt_in: bool) -> bool:
+    """Return whether auto-download is allowed for this runtime."""
     return bool(dev_mode and not is_prod_environment() and opt_in)

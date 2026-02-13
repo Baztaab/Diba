@@ -18,6 +18,7 @@ def _meta() -> Meta:
 
 
 def compute(family: str, scheme: str, *, state: VedicState | None = None, **_kwargs) -> DashaTimeline:
+    """Build baseline dasha timeline payload from optional shared state."""
     entries: list[dict] = []
     if state is not None:
         entries.append({"jd_ut": state.jd_ut, "message": "Base state attached for dasha pipeline wiring."})

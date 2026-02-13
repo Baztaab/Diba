@@ -50,6 +50,7 @@ def _state_from_kwargs(kwargs: dict) -> VedicState:
 
 
 def compute_d1(*, state: VedicState | None = None, **kwargs) -> ChartResult:
+    """Compute D1 chart payload from shared state or birth kwargs."""
     base_state = state or _state_from_kwargs(kwargs)
     payload = {
         "jd_ut": base_state.jd_ut,
@@ -68,6 +69,7 @@ def compute_varga(
     *,
     state: VedicState | None = None,
 ) -> VargaResult:
+    """Compute one varga payload from provided core objects or state."""
     core = core_objects if core_objects is not None else (state.core_objects if state is not None else None)
     if core is None:
         raise ValueError("compute_varga requires either core_objects or state.")

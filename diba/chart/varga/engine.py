@@ -12,7 +12,8 @@ def compute_varga(
     core_objects: Mapping[str, Any],
     chart_id: str,
     method: Optional[int] = None,
-):
+) -> dict[str, Any]:
+    """Dispatch one varga computation to canonical varga runtime."""
     return _compute_varga(core_objects, chart_id, method=method)
 
 
@@ -20,5 +21,6 @@ def compute_vargas(
     core_objects: Mapping[str, Any],
     charts: Iterable[str],
     methods: Optional[Mapping[str, int]] = None,
-):
+) -> dict[str, dict[str, Any]]:
+    """Dispatch many varga computations to canonical varga runtime."""
     return _compute_vargas(core_objects, charts, methods=methods)

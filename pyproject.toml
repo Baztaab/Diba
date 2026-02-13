@@ -119,12 +119,28 @@ line-length = 120
 
 [tool.ruff.lint]
 select = ["F", "E", "W", "I", "TID"]
-ignore = ["E402", "E501", "E731"]
+extend-select = ["D"]
+ignore = ["E402", "E501", "E731", "D107"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+ignore-decorators = ["typing.overload", "typing_extensions.overload"]
+ignore-var-parameters = true
 
 [tool.ruff.lint.per-file-ignores]
 "diba/settings/__init__.py" = ["F401", "F403"]
 "diba/schemas/__init__.py" = ["F401", "F403"]
 "diba/infra/swisseph/session.py" = ["TID251"]
+"tests/**/*.py" = ["D"]
+"diba/experimental/**/*.py" = ["D"]
+"**/__init__.py" = ["D104"]
+"diba/schemas/**/*.py" = ["D"]
+"diba/vedic/**/*.py" = ["D"]
+"diba/__init__.py" = ["D"]
+"diba/cli.py" = ["D"]
+"diba/settings/**/*.py" = ["D"]
+"diba/utilities.py" = ["D"]
+"diba/time_contract.py" = ["D"]
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 "swisseph" = { msg = "Direct swisseph import is forbidden. Use VedicCalculationContext/SwissEph adapter path." }

@@ -18,6 +18,7 @@ def _meta() -> Meta:
 
 
 def compute_tajaka(*, state: VedicState | None = None, **_kwargs) -> TransitResult:
+    """Build baseline transit payload from optional shared base state."""
     payload = {"implemented": False, "message": "Transit full coverage is scheduled in phase-2."}
     if state is not None:
         payload["base_jd_ut"] = state.jd_ut
