@@ -4,19 +4,28 @@ Last updated: 2026-02-13
 
 ## Snapshot
 
-- Phase-2 Engine/State implementation is completed.
+- Phase-2 Engine/State implementation is completed and stable.
+- Action-1 ephemeris runtime contract is implemented in `diba/infra/io/ephemeris.py`:
+  - deterministic path precedence
+  - fail-fast env-path validation
+  - in-process re-init conflict detection for runtime asset policy
+  - expectations shape validation
 - SwissEph containment allowlist remains unchanged; no new `swisseph` import/use was introduced outside the existing boundary.
-- Docstring policy enforcement is now active in CI via Ruff (`pydocstyle`, `google` convention) with scoped per-file ignores for non-migrated areas.
-- Added a concurrency hard-check proving session context does not leak across threads.
+- Docstring policy enforcement is active in CI via Ruff (`pydocstyle`, `google` convention) with scoped per-file ignores for non-migrated areas.
+- Concurrency hard-check confirms session context isolation across threads.
 
 ## Verification
 
 - `ruff check diba tests` -> pass
-- `pytest -q` -> 83 passed
+- `pytest -q` -> 92 passed
 
 ## Latest Commits
 
-- `7ea238f` Phase-2 engine/state orchestration and ephemeris policy
-- `6c0fd1f` project memory phase-2 finalization
+- `fc15b20` Infra: enforce ephemeris runtime contract (precedence, fail-fast, conflict) + tests
+- `0b547ee` Project memory: log Action-1 ephemeris runtime contract
+- `19d850b` Project memory: log lab inspirations alignment validation
+- `b061106` Docs: align lab inspirations with runtime contracts and stable golden scope
 
-- گیت‌های policy و artifactهای تحقیق فعال و commit شدند.
+## Key Observation
+
+- Ephemeris runtime contract is implemented and test-covered, but not yet wired into the main Engine state-build path. This is the next high-impact hardening item.
