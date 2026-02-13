@@ -122,4 +122,14 @@ def build_parser() -> argparse.ArgumentParser:
     d1.add_argument("--interactive", action="store_true", help="Prompt for missing values")
     d1.add_argument("--ephe-path", help="Set Swiss Ephemeris path")
 
+    bench = subparsers.add_parser("bench", help="Benchmark tools")
+    bench_sub = bench.add_subparsers(dest="bench_command")
+    state_base = bench_sub.add_parser("state-base", help="Benchmark base state orchestration")
+    state_base.add_argument("--n", type=int, default=1000, help="Number of benchmark iterations")
+    state_base.add_argument("--tol-profile", choices=["ci", "golden"], help="Tolerance profile label in output")
+    state_base.add_argument("--warm-cache", action="store_true", help="Run one warm-up compute before timing")
+    state_base.add_argument("--include-ephe-io", action="store_true", help="Include ephemeris init in timing")
+    state_base.add_argument("--ephe-path", help="Set Swiss Ephemeris path")
+    state_base.add_argument("--format", default="json")
+
     return parser

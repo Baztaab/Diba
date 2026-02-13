@@ -16,3 +16,19 @@ def render_pretty_d1(data: Dict) -> str:
     for name, deg in planets.items():
         lines.append(f"  {name}: {deg:.6f} deg")
     return "\n".join(lines)
+
+
+def render_pretty_bench(data: Dict) -> str:
+    lines = [
+        f"Benchmark: {data.get('benchmark')}",
+        f"Samples: {data.get('sample_size')}",
+        f"Profile: {data.get('tolerance_profile')}",
+        f"Cache mode: {data.get('cache_mode')}",
+        f"Ephemeris I/O: {data.get('ephemeris_io')}",
+        f"CPU: {data.get('cpu_model')}",
+        f"Machine: {data.get('machine')}",
+        f"Median: {data.get('median_ms')} ms",
+        f"P95: {data.get('p95_ms')} ms",
+        f"Charts/sec: {data.get('charts_per_sec')}",
+    ]
+    return "\n".join(lines)
