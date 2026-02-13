@@ -19,6 +19,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
 
+from diba.core.contracts import DEFAULT_AYANAMSA_ID
 from diba.infra.swisseph import adapter as swe_adapter
 from diba.infra.swisseph import swe
 from diba.infra.swisseph.session import (
@@ -28,6 +29,7 @@ from diba.infra.swisseph.session import (
     set_sid_mode,
 )
 from diba.vedic.registry import (
+    AYANAMSA_REGISTRY,
     AyanamsaSpec,
     HouseFetchPlan,
     HouseSystemSpec,
@@ -47,7 +49,8 @@ PLANET_FLAGS = (
 ASC_FLAGS = swe.FLG_SIDEREAL
 ASC_HSYS = b"P"  # Explicitly pin to SwissEph default (Placidus)
 
-BASELINE_SID_MODE = swe.SIDM_LAHIRI
+_BASELINE_AYANAMSA_SPEC = AYANAMSA_REGISTRY[DEFAULT_AYANAMSA_ID]
+BASELINE_SID_MODE = getattr(swe, str(_BASELINE_AYANAMSA_SPEC.swe_mode))
 
 
 def _norm360(x: float) -> float:
@@ -226,7 +229,9 @@ class VedicCalculationContext:
             True
         """
         if self.ayanamsa.swe_mode == "SIDM_USER":
-            raise VedicRegistryError("SIDM_USER is not supported in Commit B canonical context.")
+            raise VedicRegistryError(
+                "Ayanamsa 'sidm_user' is disabled in canonical runtime (reason_code=disabled)."
+            )
         node_spec = resolve_node_mode(self.node_mode)
 
         planets = dict(_CLASSIC_PLANETS)

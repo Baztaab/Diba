@@ -6,6 +6,7 @@ import os
 from dataclasses import dataclass
 
 DEFAULT_EPHE_EXPECTATIONS = "de405/sepl_18"
+DEFAULT_AYANAMSA_ID = "lahiri"
 
 
 @dataclass(frozen=True)

@@ -13,9 +13,10 @@ from diba.vedic.registry import (
 def test_registry_ayanamsa_resolution():
     """Verify correct resolution and mapping of Ayanamsa modes."""
     # Test case-insensitive
-    spec = resolve_ayanamsa("Lahiri")
+    spec, report = resolve_ayanamsa("Lahiri")
     assert spec.id == "lahiri"
     assert spec.swe_mode == "SIDM_LAHIRI"
+    assert report.was_fallback is False
 
     # Test invalid input
     with pytest.raises(VedicRegistryError) as excinfo:
@@ -49,7 +50,7 @@ def test_registry_house_system_resolution():
 
 def test_registry_immutability():
     """Ensure Specs are frozen dataclasses using the specific error type."""
-    spec = resolve_ayanamsa("lahiri")
+    spec, _ = resolve_ayanamsa("lahiri")
 
     # Using FrozenInstanceError is more precise than generic AttributeError
     with pytest.raises(FrozenInstanceError):

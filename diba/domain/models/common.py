@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from typing import Annotated
+
+from pydantic import BaseModel, BeforeValidator, Field
+
+from diba.domain.enums.generated_ayanamsa_enum import AyanamsaIdEnum
+from diba.vedic.registry import canonicalize_ayanamsa_id
 
 
 class PlaceInput(BaseModel):
@@ -29,7 +34,7 @@ class BirthData(BaseModel):
 class RuntimePolicy(BaseModel):
     """Runtime settings for ayanamsa, houses, and node mode."""
 
-    ayanamsa_id: str = Field(default="lahiri")
+    ayanamsa_id: Annotated[AyanamsaIdEnum, BeforeValidator(canonicalize_ayanamsa_id)] = Field(default="lahiri")
     house_system_id: str = Field(default="whole_sign")
     node_mode: str = Field(default="mean")
 

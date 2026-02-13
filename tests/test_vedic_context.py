@@ -46,7 +46,7 @@ def test_context_compute_core_returns_retrograde_fields():
         jd_utc=swe.julday(2004, 1, 27, 12.0, swe.GREG_CAL),
         lat=35.7,
         lon=51.1,
-        ayanamsa=resolve_ayanamsa("lahiri"),
+        ayanamsa=resolve_ayanamsa("lahiri")[0],
         house_system=resolve_house_system("whole_sign"),
     )
 
@@ -76,7 +76,7 @@ def test_context_finally_enforces_baseline_sid_mode():
         jd_utc=jd,
         lat=35.7,
         lon=51.1,
-        ayanamsa=resolve_ayanamsa("lahiri"),
+        ayanamsa=resolve_ayanamsa("lahiri")[0],
         house_system=resolve_house_system("whole_sign"),
     )
     _ = ctx.compute_core()

@@ -1,10 +1,13 @@
 import argparse
+import logging
 from enum import Enum
 from typing import Optional
 
 from diba._cli.errors import ValidationError
+from diba.core.contracts import DEFAULT_AYANAMSA_ID
 from diba.infra.io.ephemeris import resolve_ephemeris_path as _resolve_ephemeris_path
 from diba.vedic.registry import (
+    AyanamsaSpec,
     VedicRegistryError,
     list_ayanamsa_ids,
     list_house_system_ids,
@@ -13,6 +16,8 @@ from diba.vedic.registry import (
     resolve_house_system,
     resolve_node_mode,
 )
+
+_LOG = logging.getLogger(__name__)
 
 
 class OutputFormat(str, Enum):
@@ -39,11 +44,37 @@ def parse_is_dst(value: Optional[str]) -> Optional[bool]:
     raise ValidationError("is_dst must be true/false.")
 
 
-def parse_ayanamsa_id(name: str) -> str:
+def parse_ayanamsa_spec(
+    name: str,
+    *,
+    on_unsupported: str = "raise",
+    default_id: str = DEFAULT_AYANAMSA_ID,
+) -> AyanamsaSpec:
     try:
-        return resolve_ayanamsa(name).id
+        spec, report = resolve_ayanamsa(
+            name,
+            on_unsupported=on_unsupported,
+            default_id=default_id,
+        )
+        if report.was_fallback:
+            _LOG.warning(
+                "Ayanamsa fallback applied in CLI parse: reason_code=%s input_id=%s fallback_id=%s",
+                report.reason_code,
+                report.input_id,
+                report.effective_id,
+            )
+        return spec
     except VedicRegistryError as exc:
         raise ValidationError(str(exc)) from exc
+
+
+def parse_ayanamsa_id(
+    name: str,
+    *,
+    on_unsupported: str = "raise",
+    default_id: str = DEFAULT_AYANAMSA_ID,
+) -> str:
+    return parse_ayanamsa_spec(name, on_unsupported=on_unsupported, default_id=default_id).id
 
 
 def parse_node_mode(name: str) -> str:
@@ -115,7 +146,7 @@ def build_parser() -> argparse.ArgumentParser:
     group = d1.add_mutually_exclusive_group(required=False)
     group.add_argument("--online", action="store_true", help="Use online lookup")
     group.add_argument("--offline", action="store_true", help="Use offline data")
-    d1.add_argument("--ayanamsa-id", choices=list_ayanamsa_ids(), default="lahiri")
+    d1.add_argument("--ayanamsa-id", choices=list_ayanamsa_ids(selectable_only=True), default="lahiri")
     d1.add_argument("--node-mode", choices=list_node_mode_ids(), default="mean")
     d1.add_argument("--house-system-id", choices=list_house_system_ids(), default="whole_sign")
     d1.add_argument("--format", default="pretty")

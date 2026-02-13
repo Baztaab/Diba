@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 from diba._cli.errors import CLIError
 from diba._cli.options import (
-    parse_ayanamsa_id,
+    parse_ayanamsa_spec,
     parse_house_system_id,
     parse_node_mode,
     parse_output_format,
@@ -77,7 +77,7 @@ def run_vedic_d1_command(args) -> Dict[str, Any]:
         raise CLIError("Date/time fields (year, month, day, hour, minute) are required.")
 
     second = validate_seconds(args.second)
-    ayanamsa_id = parse_ayanamsa_id(args.ayanamsa_id)
+    ayanamsa_spec = parse_ayanamsa_spec(args.ayanamsa_id)
     node_mode = parse_node_mode(args.node_mode)
     house_system_id = parse_house_system_id(args.house_system_id)
     parse_output_format(args.format)
@@ -95,7 +95,8 @@ def run_vedic_d1_command(args) -> Dict[str, Any]:
             tz_str=args.tz_str,
             lat=float(args.lat),
             lon=float(args.lng),
-            ayanamsa_id=ayanamsa_id,
+            ayanamsa_id=ayanamsa_spec.id,
+            ayanamsa_spec=ayanamsa_spec,
             node_mode=node_mode,
             house_system_id=house_system_id,
             ephe_path=ephe_path,

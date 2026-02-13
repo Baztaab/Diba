@@ -24,9 +24,8 @@ from diba.schemas.kr_models import VedicSettingsModel
 from diba.vedic.context import VedicCalculationContext
 from diba.vedic.factory import VedicSubjectFactory
 from diba.vedic.registry import (
-    AyanamsaSpec,
+    AYANAMSA_REGISTRY,
     HouseSystemSpec,
-    resolve_ayanamsa,
     resolve_house_system,
     resolve_node_mode,
 )
@@ -179,7 +178,10 @@ def build_static_chart_v0_1(
         'static_chart.v0.1'
     """
     normalized = _normalize_settings(settings)
-    ayanamsa_spec: AyanamsaSpec = resolve_ayanamsa(normalized.ayanamsa_id)
+    ayanamsa_key = (
+        normalized.ayanamsa_id.value if hasattr(normalized.ayanamsa_id, "value") else str(normalized.ayanamsa_id)
+    )
+    ayanamsa_spec = AYANAMSA_REGISTRY[str(ayanamsa_key)]
     house_spec: HouseSystemSpec = resolve_house_system(normalized.house_system_id)
     node_spec = resolve_node_mode(normalized.node_mode)
 

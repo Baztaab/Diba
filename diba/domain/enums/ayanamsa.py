@@ -1,8 +1,7 @@
-"""Supported ayanamsa ids in public API."""
+"""Ayanamsa type contracts for public and internal runtime surfaces."""
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import NewType
 
-AyanamsaId = Literal["lahiri", "true_citra", "fagan_bradley", "raman", "krishnamurti"]
-
+AyanamsaId = NewType("AyanamsaId", str)

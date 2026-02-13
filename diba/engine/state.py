@@ -4,20 +4,23 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Literal, Optional
 
 import pytz
 from pytz.exceptions import AmbiguousTimeError, NonExistentTimeError, UnknownTimeZoneError
 
-from diba.core.contracts import DEFAULT_EPHE_EXPECTATIONS
+from diba.core.contracts import DEFAULT_AYANAMSA_ID, DEFAULT_EPHE_EXPECTATIONS
 from diba.domain.models.common import BirthData
 from diba.infra.io.ephemeris import initialize_ephemeris_runtime
 from diba.time_contract import datetime_to_julian
 from diba.vedic.context import VedicCalculationContext
 from diba.vedic.factory import VedicFactoryError
 from diba.vedic.registry import resolve_ayanamsa, resolve_house_system, resolve_node_mode
+
+_LOG = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -38,6 +41,8 @@ class AstrologySettings:
     ayanamsa_id: str = "lahiri"
     house_system_id: str = "whole_sign"
     node_mode: str = "mean"
+    ayanamsa_on_unsupported: Literal["raise", "fallback_default"] = "raise"
+    ayanamsa_default_id: str = DEFAULT_AYANAMSA_ID
 
 
 @dataclass(frozen=True)
@@ -121,7 +126,18 @@ def build_vedic_state(
     """Compute and package canonical base state from birth and runtime settings."""
     jd_ut = _to_jd_ut(birth_data)
 
-    ayanamsa = resolve_ayanamsa(astrology_settings.ayanamsa_id)
+    ayanamsa, ayanamsa_report = resolve_ayanamsa(
+        astrology_settings.ayanamsa_id,
+        on_unsupported=astrology_settings.ayanamsa_on_unsupported,
+        default_id=astrology_settings.ayanamsa_default_id,
+    )
+    if ayanamsa_report.was_fallback:
+        _LOG.warning(
+            "Ayanamsa fallback applied in engine state: reason_code=%s input_id=%s fallback_id=%s",
+            ayanamsa_report.reason_code,
+            ayanamsa_report.input_id,
+            ayanamsa_report.effective_id,
+        )
     house_system = resolve_house_system(astrology_settings.house_system_id)
     node_mode = resolve_node_mode(astrology_settings.node_mode)
 

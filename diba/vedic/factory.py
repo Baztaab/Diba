@@ -29,8 +29,11 @@ from diba.time_contract import datetime_to_julian
 from diba.vedic.builder import build_vedic_model
 from diba.vedic.context import VedicCalculationContext
 from diba.vedic.registry import (
+    AYANAMSA_REGISTRY,
+    AyanamsaSpec,
     VedicRegistryError,
-    resolve_ayanamsa,
+    canonicalize_ayanamsa_id,
+    list_ayanamsa_ids,
     resolve_house_system,
     resolve_node_mode,
 )
@@ -174,6 +177,32 @@ class VedicSubjectFactory:
     """
 
     @classmethod
+    def _resolve_ayanamsa_spec_for_factory(
+        cls, ayanamsa_id: str, ayanamsa_spec: Optional[AyanamsaSpec]
+    ) -> AyanamsaSpec:
+        """Resolve ayanamsa spec for factory without calling registry resolver again."""
+        if ayanamsa_spec is not None:
+            return ayanamsa_spec
+        try:
+            canonical_id = canonicalize_ayanamsa_id(ayanamsa_id)
+        except VedicRegistryError as exc:
+            raise VedicFactoryError(str(exc)) from exc
+        spec = AYANAMSA_REGISTRY.get(canonical_id)
+        if spec is None:
+            raise VedicFactoryError(
+                f"Invalid Ayanamsa mode: '{ayanamsa_id}'. Available: {list_ayanamsa_ids(selectable_only=True)}"
+            )
+        if spec.status != "implemented":
+            raise VedicFactoryError(
+                f"Ayanamsa '{ayanamsa_id}' is recognized but not implemented in Diba runtime."
+            )
+        if spec.id == "sidm_user":
+            raise VedicFactoryError(
+                "Ayanamsa 'sidm_user' is disabled in canonical runtime (reason_code=disabled)."
+            )
+        return spec
+
+    @classmethod
     def from_birth_data(
         cls,
         *,
@@ -194,6 +223,7 @@ class VedicSubjectFactory:
         varga_methods: Optional[Mapping[str, int]] = None,
         varga_profile: Optional[str] = None,
         ephe_path: Optional[str] = None,
+        ayanamsa_spec: Optional[AyanamsaSpec] = None,
     ) -> VedicModel:
         """Build a VedicModel from localized birth data.
 
@@ -215,6 +245,7 @@ class VedicSubjectFactory:
             varga_methods: Optional per-varga method overrides.
             varga_profile: Optional varga profile ID.
             ephe_path: Optional path to SwissEph data files.
+            ayanamsa_spec: Optional pre-resolved ayanamsa spec to avoid re-resolution.
 
         Returns:
             Fully assembled VedicModel.
@@ -244,7 +275,7 @@ class VedicSubjectFactory:
         """
         jd_utc = _jd_utc_from_birth_data(year, month, day, hour, minute, seconds, tz_str)
         try:
-            ayanamsa_spec = resolve_ayanamsa(ayanamsa_id)
+            resolved_ayanamsa = cls._resolve_ayanamsa_spec_for_factory(ayanamsa_id, ayanamsa_spec)
             house_spec = resolve_house_system(house_system_id)
             node_spec = resolve_node_mode(node_mode)
         except VedicRegistryError as exc:
@@ -262,14 +293,14 @@ class VedicSubjectFactory:
             lon=lon_f,
             altitude=altitude_f,
             ephe_path=ephe_path,
-            ayanamsa=ayanamsa_spec,
+            ayanamsa=resolved_ayanamsa,
             house_system=house_spec,
             node_mode=node_spec.id,
         )
         core = context.compute_core()
 
         settings = VedicSettingsModel(
-            ayanamsa_id=ayanamsa_spec.id,
+            ayanamsa_id=resolved_ayanamsa.id,
             node_mode=node_spec.id,
             house_system_id=house_spec.id,
         )

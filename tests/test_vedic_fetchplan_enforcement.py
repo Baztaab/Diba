@@ -12,7 +12,7 @@ def test_fetch_plan_asc_only_no_cusps():
         jd_utc=swe.julday(2004, 1, 27, 12.0, swe.GREG_CAL),
         lat=35.7,
         lon=51.1,
-        ayanamsa=resolve_ayanamsa("lahiri"),
+        ayanamsa=resolve_ayanamsa("lahiri")[0],
         house_system=resolve_house_system("whole_sign"),
     )
     core = ctx.compute_core()
@@ -24,7 +24,7 @@ def test_fetch_plan_houses_ex_returns_cusps():
         jd_utc=swe.julday(2004, 1, 27, 12.0, swe.GREG_CAL),
         lat=35.7,
         lon=51.1,
-        ayanamsa=resolve_ayanamsa("lahiri"),
+        ayanamsa=resolve_ayanamsa("lahiri")[0],
         house_system=HouseSystemSpec(
             id="placidus",
             pyjhora_method=4,

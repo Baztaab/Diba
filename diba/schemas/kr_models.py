@@ -27,11 +27,12 @@ access to fields while maintaining Pydantic validation.
 This is part of Diba (C) 2025 Giacomo Battaglia
 """
 
-from typing import List, Literal, Optional, Union
+from typing import Annotated, List, Literal, Optional, Union
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field
 from typing_extensions import TypedDict
 
+from diba.domain.enums.generated_ayanamsa_enum import AyanamsaIdEnum
 from diba.schemas.kr_literals import (
     AspectMovementType,
     AspectName,
@@ -52,6 +53,7 @@ from diba.schemas.kr_literals import (
     SignsEmoji,
     ZodiacType,
 )
+from diba.vedic.registry import canonicalize_ayanamsa_id
 
 
 class SubscriptableBaseModel(BaseModel):
@@ -136,7 +138,7 @@ class VedicSettingsModel(SubscriptableBaseModel):
     """
     model_config = ConfigDict(extra="forbid")
 
-    ayanamsa_id: str
+    ayanamsa_id: Annotated[AyanamsaIdEnum, BeforeValidator(canonicalize_ayanamsa_id)]
     node_mode: Literal["mean", "true"]
     house_system_id: Literal[
         "whole_sign",
