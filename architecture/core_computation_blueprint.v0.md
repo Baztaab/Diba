@@ -138,9 +138,17 @@
   - Which step-size and precision controls are externally visible.
   - Which transit-coupling paths expose refinement diagnostics.
 
+## Decision packs
+
+- [D01_dst_fold_gap_policy.md](decisions/D01_dst_fold_gap_policy.md)
+- [D02_time_bundle_canonicalization.md](decisions/D02_time_bundle_canonicalization.md)
+- [D03_swisseph_state_isolation.md](decisions/D03_swisseph_state_isolation.md)
+- [D04_varga_dispatch_and_composition.md](decisions/D04_varga_dispatch_and_composition.md)
+- [D05_graha_pipeline_contract.md](decisions/D05_graha_pipeline_contract.md)
+
 ## 6) Risk register
 
-- FACT: Mixed use of `jd` and `jd_utc` occurs across sidereal and house paths, including third-argument differences in `set_ayanamsa_mode` callsites. [E27,E28,E29,E30,E31,E32,E34]
+- FACT: Mixed use of `jd` and `jd_utc` occurs across sidereal and house paths, including third-argument differences in `set_ayanamsa_mode` callsites. [E27,E28,E29,E30,E31,E32,E34] See decision packs: [D02](decisions/D02_time_bundle_canonicalization.md), [D03](decisions/D03_swisseph_state_isolation.md)
 - FACT: Some house and helper paths return without local `reset_ayanamsa_mode` in the same function body. [E29,E31]
 - FACT: Transit-coupling search paths rely on iterative stepping and interpolation, which can vary with step parameters. [Source: `research/varga_divisional_charts/varga_transit_entry_dates/guru.md -> src/jhora/horoscope/chart/charts.py:L2033-L2064`; Source: `research/varga_divisional_charts/varga_transit_entry_dates/guru.md -> src/jhora/horoscope/chart/charts.py:L2091-L2121`]
 - FACT: Varga routing includes both standard dispatch and custom path branching under max-factor ranges. [Source: `research/varga_divisional_charts/core_varga_engine/guru.md -> src/jhora/horoscope/chart/charts.py:L1066-L1077`; Source: `research/varga_divisional_charts/core_varga_engine/guru.md -> src/jhora/const.py:L726-L730`]
@@ -196,3 +204,4 @@ flowchart TD
     MIX --> OUT
     OUT --> DER["varga special derivations"]
 ```
+
