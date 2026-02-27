@@ -1,0 +1,3 @@
+producer_function	producer_shape	consumer_function	consumer_index_use	match_status	evidence_lines	anchor_id
+aayu.get_dhasa_antardhasa	(_dhasa_type, list[(dhasa_lord,bhukthi_lord,start,duration)])	main._get_aayu_dhasa_bhukthi	self._aayu_dhasa_type, then unpack 4-field tuples	match	src/jhora/horoscope/main.py:L1152-L1158	AY23
+aayu.longevity	(total_longevity,_aayu_type)	direct module consumer (none in main)	N/A	orphan_producer	src/jhora/horoscope/dhasa/graha/aayu.py:L494-L497	AY24

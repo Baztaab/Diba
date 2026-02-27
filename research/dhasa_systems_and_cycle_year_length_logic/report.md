@@ -1,0 +1,26 @@
+# dhasa_systems_and_cycle_year_length_logic
+
+- status: active
+- artifacts:
+  - [dhasa_behavior_contract_map.engine_plus_consumers.md](./dhasa_behavior_contract_map.engine_plus_consumers.md)
+  - [_coverage_dhasa_callsites_engine_plus_consumers.tsv](./_coverage_dhasa_callsites_engine_plus_consumers.tsv)
+  - [_coverage_dhasa_cycle_year_matrix.tsv](./_coverage_dhasa_cycle_year_matrix.tsv)
+  - [_coverage_dhasa_output_contract_matrix.tsv](./_coverage_dhasa_output_contract_matrix.tsv)
+  - [_coverage_dhasa_option_switch_matrix.tsv](./_coverage_dhasa_option_switch_matrix.tsv)
+  - [_codepack/MANIFEST.tsv](./_codepack/MANIFEST.tsv)
+- observed PyJHora behaviors:
+  - cycle-year bases vary across sidereal, tropical, and 360-normalized paths.
+  - initial dhasa balance formulas use nakshatra, tithi, yoga, and longitude fractions by family.
+  - option branches route seed basis, direction, and tribhagi scaling logic.
+  - consumer wrappers in main convert producer tuples into display labels.
+  - dhasa engine files contain no direct ayanamsa callsite; ayanamsa mutation appears in main init.
+- inventory summary:
+  - callsite rows: `2130`
+  - unique `(file,function_context)`: `412`
+  - residual callsites (`DS900`): `2025`
+  - cycle-year matrix rows (data rows): `234`
+  - output-contract matrix rows (data rows): `6`
+  - option-switch matrix rows (data rows): `407`
+  - codepack files: `55`
+- cross-cutting map:
+  - [sweep_2_architecture_coupling_contract_map.md](../../sweep_2_architecture_coupling_contract_map.md)

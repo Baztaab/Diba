@@ -1,0 +1,6 @@
+producer_function	producer_shape	consumer_function	consumer_index_use	match_status	evidence_lines	anchor_id
+strength.shad_bala	[sthana,kala,dig,cheshta,naisargika,drik,sum,rupa,strength]	main._get_shad_bala	passes full list unchanged	match	src/jhora/horoscope/main.py:L902-L905	GS21
+strength.bhava_bala	[bb,bb_rupas,bb_strength]	main._get_bhava_bala	transpose np.array(bb).T	transform	src/jhora/horoscope/main.py:L906-L914	GS22
+charts._vimsopaka_bala_of_planets	dict[p]=[count,divisional_tags,score]	main._get_vimsopaka_bala	sv[p][0], sv[p][1], sv[p][2]	match	src/jhora/horoscope/main.py:L926-L943	GS23
+charts.planets_in_combustion	list[planet_id]	aayu._pindayu_full_longevity_of_planets	membership & weights per planet	match	src/jhora/horoscope/dhasa/graha/aayu.py:L46-L58	GS24
+charts.planets_in_retrograde	list[planet_id]	dosha.manglik	2 in retrograde list	match	src/jhora/horoscope/chart/dosha.py:L110-L111	GS25

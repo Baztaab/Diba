@@ -1,0 +1,3 @@
+file	function	rule_name	trigger	scale_factor	priority_resolution	output_factor	evidence_lines	anchor_id
+src/jhora/horoscope/dhasa/graha/aayu.py	_bharana	triple_factor	retrograde OR exalted OR owner_ruler	3.0	applied before 2x update	bharana_factors[p]=3	src/jhora/horoscope/dhasa/graha/aayu.py:L234-L239	AY18
+src/jhora/horoscope/dhasa/graha/aayu.py	_bharana	double_factor	sva-navamsa OR sva-drekkana OR vargottama-navamsa	2.0	if both 3x and 2x apply, higher factor intended by comment	bharana_factors[p]=2/3 per update	src/jhora/horoscope/dhasa/graha/aayu.py:L240-L245	AY19
