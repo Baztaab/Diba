@@ -1,0 +1,5 @@
+file	function	source_planet	contributor	target_mode	offset_rule	target_house	point_delta	output_tensor_slot	evidence_lines	anchor_id
+src/jhora/const.py	ashtaka_varga_dict	0..7 (Sun..Lagna)	nested contributor offset lists	BAV+PAV seed table	1-based relative offset from contributor house	computed in get_ashtaka_varga	+1	ashtaka_varga_dict[key][contributor][offset]	src/jhora/const.py:L239-L248	AV01
+src/jhora/horoscope/chart/ashtakavarga.py	get_ashtaka_varga	p=int(key)	op=0..7 (7=lagna)	BAV	r=(raasi-1+pr)%12	r	raasi_ashtaka[p][r]+=1	binna_ashtaka_varga[p][r]	src/jhora/horoscope/chart/ashtakavarga.py:L42-L55	AV03
+src/jhora/horoscope/chart/ashtakavarga.py	get_ashtaka_varga	p=int(key)	op=0..7 plus accumulator axis	PAV	same r as BAV	r	set contributor slot and increment accumulator slot	prastara_ashtaka_varga[p][op][r] & prastara_ashtaka_varga[p][-1][r]	src/jhora/horoscope/chart/ashtakavarga.py:L41-L56	AV03
+src/jhora/horoscope/chart/ashtakavarga.py	get_ashtaka_varga	BAV rows 0..6	sum across Sun..Saturn rows	SAV	exclude lagna via bav[:-1]	0..11	sum(axis=0)	samudhaya_ashtaka_varga[h]	src/jhora/horoscope/chart/ashtakavarga.py:L57-L58	AV04

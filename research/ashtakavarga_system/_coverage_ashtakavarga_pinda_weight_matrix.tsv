@@ -1,0 +1,4 @@
+file	function	weight_type	weight_vector	input_vector	formula_signature	normalization_unit	output_slot	evidence_lines	anchor_id
+src/jhora/horoscope/chart/ashtakavarga.py	_sodhya_pindas	rasimana	const.ashtakavarga_rasimana_multipliers	bav[p][0..11]	sum(np.multiply(bav[p], rasimana_multipliers))	none	raasi_pindas[p]	src/jhora/horoscope/chart/ashtakavarga.py:L126-L134	AV07
+src/jhora/horoscope/chart/ashtakavarga.py	_sodhya_pindas	grahamana	const.ashtakavarga_grahamana_multipliers	bav[p][planet_houses[i]]	sum(grahamana[i]*bav[p][pr] for i,pr in enumerate(planet_houses))	none	graha_pindas[p]	src/jhora/horoscope/chart/ashtakavarga.py:L135-L138	AV07
+src/jhora/horoscope/chart/ashtakavarga.py	_sodhya_pindas	sodhya_total	raasi_pinda + graha_pinda	raasi_pindas[p], graha_pindas[p]	sodhya_pindas[p]=raasi_pindas[p]+graha_pindas[p]	none	sodhya_pindas[p]	src/jhora/horoscope/chart/ashtakavarga.py:L138-L139	AV07

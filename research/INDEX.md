@@ -20,3 +20,6 @@
   - `report`: `D:\Diba\research\dhasa_systems_and_cycle_year_length_logic\report.md`
 - `longevity_and_ayurdaya` — ACTIVE
   - `report`: `D:\Diba\research\longevity_and_ayurdaya\report.md`
+
+- `ashtakavarga_system` — ACTIVE
+  - `report`: `D:\Diba\research\ashtakavarga_system\report.md`

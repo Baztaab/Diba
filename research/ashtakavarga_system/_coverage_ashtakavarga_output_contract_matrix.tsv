@@ -1,0 +1,3 @@
+producer_function	producer_shape	consumer_function	consumer_index_use	match_status	evidence_lines	anchor_id
+ashtakavarga.get_ashtaka_varga	(bav[8][12], sav[12], pav[8][9][12])	ABSENCE-OF-NONUI-CONSUMER	not_found_in_non_ui_scope	absence_fact	research/ashtakavarga_system/_coverage_ashtakavarga_callsites_engine_plus_consumers.tsv:L2	ABSENCE-OF-NONUI-CONSUMER
+ashtakavarga.sodhaya_pindas	(raasi_pindas[7], graha_pindas[7], sodhya_pindas[7])	ABSENCE-OF-NONUI-CONSUMER	not_found_in_non_ui_scope	absence_fact	research/ashtakavarga_system/_coverage_ashtakavarga_callsites_engine_plus_consumers.tsv:L2	ABSENCE-OF-NONUI-CONSUMER
