@@ -23,3 +23,6 @@
 
 - `ashtakavarga_system` — ACTIVE
   - `report`: `D:\Diba\research\ashtakavarga_system\report.md`
+
+- `transit_and_tajaka` — ACTIVE
+  - `report`: `D:\Diba\research\transit_and_tajaka\report.md`

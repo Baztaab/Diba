@@ -1,0 +1,7 @@
+file	function	component	component_formula	weighting	aggregation_formula	output_shape	evidence_lines	anchor_id
+src/jhora/horoscope/chart/strength.py	_kshetra_bala	kshetra	house_strength -> {30,15,7.5}	relation_scale	returns kb.values()	iterable_7_values	src/jhora/horoscope/chart/strength.py:L174-L184	TT09
+src/jhora/horoscope/chart/strength.py	_uchcha_bala	uchcha	pd=(p_long+360-deep_debilitation)%360; ub=pd/3 or pd/180*20	saravali_or_pvr	per_planet_list	list_7	src/jhora/horoscope/chart/strength.py:L312-L325	TT09
+src/jhora/horoscope/chart/strength.py	_hadda_bala	hadda	hadda_lord_relation_points	{15,7.5,3.75,0}	list_comprehension	list_7	src/jhora/horoscope/chart/strength.py:L326-L338	TT09
+src/jhora/horoscope/chart/strength.py	_drekkana_bala	drekkana	house_strength -> {10,5,2.5}	friendship_scale	dict_by_planet	dict_0_6	src/jhora/horoscope/chart/strength.py:L339-L349	TT09
+src/jhora/horoscope/chart/strength.py	_navamsa_bala	navamsa	house_strength -> {5,2.5,1.25}	friendship_scale	dict_by_planet	dict_0_6	src/jhora/horoscope/chart/strength.py:L350-L360	TT09
+src/jhora/horoscope/chart/strength.py	pancha_vargeeya_bala	aggregation	pvb=[kb,ub,hb,db,nb]	sum(component_values)/4.0	round(sum(x)/4.0,2)	dict_0_6	src/jhora/horoscope/chart/strength.py:L387-L401	TT09

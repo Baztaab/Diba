@@ -1,0 +1,7 @@
+file	function	search_stage	initial_guess_formula	iteration_mode	refinement_method	ephemeris_call	implementation_status	evidence_lines	anchor_id
+src/jhora/panchanga/drik.py	next_solar_date	seed_longitude_capture	sun_long_at_dob=dhasavarga(jd_at_dob,...)[0]	single_capture	delegates_to___next_solar_jd	dhasavarga->sidereal_longitude	Active	src/jhora/panchanga/drik.py:L2258-L2260	TT02
+src/jhora/panchanga/drik.py	next_solar_date	initial_guess	jd_extra=int(((years-1)+(months-1)/12+(sixty_hours-1)/144)*const.tropical_year)	single_estimate	target_longitude_then_refine	const.tropical_year + __next_solar_jd	Active	src/jhora/panchanga/drik.py:L2262-L2270	TT02
+src/jhora/panchanga/drik.py	__next_solar_jd	bracket_search	jd_next=jd	linear_day_step_loop	1_degree_window_bracket	solar_longitude(jd_next)	Active	src/jhora/panchanga/drik.py:L2220-L2230	TT03
+src/jhora/panchanga/drik.py	__next_solar_jd	subday_refinement	offsets=[0.0,0.25,0.5,0.75,1.0]	five_point_sampling	inverse_lagrange	solar_longitude + utils.inverse_lagrange	Active	src/jhora/panchanga/drik.py:L2235-L2242	TT01
+src/jhora/panchanga/drik.py	__next_solar_jd	convergence_guard	while True loop	unbounded_loop	none	solar_longitude	WIP_TODO_no_max_count	src/jhora/panchanga/drik.py:L2217-L2219	TT03
+src/jhora/panchanga/drik.py	sidereal_longitude	ephemeris_eval	set_ayanamsa_mode(default)	direct_eval	none	swe.calc_ut(jd_utc,planet,flags)	Active	src/jhora/panchanga/drik.py:L220-L232	TT04

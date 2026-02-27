@@ -1,0 +1,6 @@
+producer_function	producer_shape	consumer_function	consumer_index_use	match_status	evidence_lines	anchor_id
+mudda.varsha_vimsottari_dhasa_bhukthi	[(pd,pb,bs,durn)]	main._get_varsha_vimsottari_dhasa	for pd,pb,bs,_ in md	match	src/jhora/horoscope/main.py:L1087-L1095	TT15
+patyayini.patyayini_dhasa	[[p,bhukthis,dd]]; bhukthis=[[bk,bs],...]	main._get_patyatini_dhasa_bhukthi	for p,bhukthis,_ then for bk,bs in bhukthis	match	src/jhora/horoscope/main.py:L1096-L1116	TT15
+narayana.varsha_narayana_dhasa_bhukthi	[(dhasa_lord,bhukthi_lord,bhukthi_start,duration)]	main._get_varsha_narayana_dhasa	[dhasa_lord,bukthi_lord,bukthi_start,_]=db[i]	match	src/jhora/horoscope/main.py:L1078-L1086	TT15
+drik.next_solar_date	julian_day_number	charts.rasi_chart	jd_years assignment path	match	src/jhora/horoscope/chart/charts.py:L80-L91	TT05
+main._get_annual_dhasa_bhukthi	[patyayini_info,mudda_info,varsha_narayana_info]	downstream_ui_or_reporting	list_slots_0_1_2	partial_no_direct_nonui_consumer_in_scope	src/jhora/horoscope/main.py:L1073-L1077	TT15
