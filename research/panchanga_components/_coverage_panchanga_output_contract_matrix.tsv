@@ -1,0 +1,14 @@
+producer_function	producer_shape	consumer_function	consumer_index_use	match_status	evidence_lines	anchor_id
+drik.tithi	[0]=tithi_no,[1]=start,[2]=end,[3..]=optional next segment	vratha.tithi_dates	uses [0],[1],[2],[3],[4],[5]	MATCHED_WITH_OPTIONAL	vratha.py:190-210; drik.py:564-566	PG16
+drik.nakshatra	[0]=nak_no,[1]=padam,[2]=start,[3]=end,[4..]=optional next segment	info._fill_information	uses [0],[1],[2],[3]	MATCHED	info.py:90-96; drik.py:723-725	PG23
+drik.nakshatra	[0]=nak_no,[1]=padam,[2]=start,[3]=end,[4..]=optional next segment	main._get_calendar_resource_strings	uses [0],[1],[2],[3]	MATCHED	main.py:183-191; drik.py:723-725	PG24
+drik.nakshatra	[0]=nak_no,[1]=padam,[2]=start,[3]=end,[4..]=optional next segment	vratha.nakshathra_dates	starts_at=current_nakshathra[1], ends_at=current_nakshathra[2]	UNCERTAIN_INDEX_MISMATCH	vratha.py:234-236; drik.py:723-725	PG38
+drik.yogam	[0]=yoga_no,[1]=start,[2]=end,[3..]=optional next segment	info._fill_information	uses [0],[1],[2]	MATCHED	info.py:131-138; drik.py:853-855	PG23
+drik.yogam	[0]=yoga_no,[1]=start,[2]=end,[3..]=optional next segment	main._get_calendar_resource_strings	uses [0],[1],[2]	MATCHED	main.py:202-210; drik.py:853-855	PG24
+drik.yogam	[0]=yoga_no,[1]=start,[2]=end,[3..]=optional next segment	vratha.yoga_dates	ends_at=cur_yoga[1]	UNCERTAIN_INDEX_MISMATCH	vratha.py:267-270; drik.py:853-855	PG39
+drik.karana	[0]=karana_no,[1]=start,[2]=end	info._fill_information	uses [0],[1],[2]	MATCHED	info.py:146-148; drik.py:873-891	PG23
+drik.karana	[0]=karana_no,[1]=start,[2]=end	main._get_calendar_resource_strings	uses [0],[1],[2]	MATCHED	main.py:210-213; drik.py:873-891	PG24
+drik.vaara	scalar weekday index 0..6	info._fill_information	uses scalar value for DAYS_LIST index	MATCHED	info.py:49; drik.py:892-899	PG23
+drik.vaara	scalar weekday index 0..6	pancha_paksha.construct_pancha_pakshi_information	weekday_index=drik.vaara(jd)+1	MATCHED	pancha_paksha.py:84; drik.py:892-899	PG26
+drik.tithi	[0]=tithi_no,...	pancha_paksha._get_paksha	_tithi=drik.tithi(jd,place)[0]	MATCHED	pancha_paksha.py:64-65; drik.py:564-566	PG25
+drik.tithi	[0]=tithi_no,...	charts._get_natural_benefics_and_malefics	_tithi=drik.tithi(jd,place)[0]	MATCHED	charts.py:1687-1692; drik.py:564-566	PG27

@@ -10,6 +10,10 @@
 - codepack:
   - `./_codepack/src/...`
   - `./_codepack/MANIFEST.tsv`
+- engine-plus-consumers extraction:
+  - [varga_behavior_contract_map.engine_plus_consumers.md](./varga_behavior_contract_map.engine_plus_consumers.md)
+  - [`_coverage_varga_callsites_engine_plus_consumers.tsv`](./_coverage_varga_callsites_engine_plus_consumers.tsv)
+  - [`_coverage_varga_method_matrix.tsv`](./_coverage_varga_method_matrix.tsv)
 - observed PyJHora behaviors:
   - Standard Dn functions are mapped through `divisional_chart_functions`.
   - `divisional_positions_from_rasi_positions` dispatches standard Dn handlers or `custom_divisional_chart`.
@@ -22,5 +26,7 @@
 ## Inventory summary
 
 - count of varga functions found: `63`
-- count of chart_method-bearing functions: `52`
-- count of codepack files: `9`
+- count of chart_method-bearing functions: `149`
+- count of codepack files: `63`
+- count of focused anchors in map: `29` (`VG01..VG28` + `VG900`)
+- count of residual rows in coverage TSV: `2714`

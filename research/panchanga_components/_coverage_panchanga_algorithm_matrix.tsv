@@ -1,0 +1,17 @@
+file	function	component	solver_type	step_or_method	branch_switch	evidence_lines	anchor_id
+src/jhora/panchanga/drik.py	_get_tithi	tithi	inverse_lagrange	offsets=[0.25,0.5,0.75,1.0]	sunrise anchor + mahabharatha branch	497-500,505-517	PG03
+src/jhora/panchanga/drik.py	tithi_using_planet_speed	tithi	speed_formula	daily_moon_speed-daily_sun_speed	mahabharatha branch	535-547	PG04
+src/jhora/panchanga/drik.py	tithi	tithi	dispatch_switch	planet_speed vs inverse_lagrange	const.use_planet_speed_for_panchangam_end_timings	571-574	PG05
+src/jhora/panchanga/drik.py	tithi_using_inverse_lagrange	tithi	wrapper_lagrange	__get_tithi_lagrange + next segment	ret[2] < 24.0	589-603	PG06
+src/jhora/panchanga/drik.py	_get_nakshathra	nakshatra	inverse_lagrange_extended	offsets + extend_angle_range	sunrise(jd_utc, place)	656-686	PG08
+src/jhora/panchanga/drik.py	nakshatra_new	nakshatra	speed_formula	daily_moon_speed	const.use_planet_speed_for_panchangam_end_timings	751-760	PG11
+src/jhora/panchanga/drik.py	_get_yogam	yoga	inverse_lagrange	offsets + inverse_lagrange	sunrise anchor	791-803	PG10
+src/jhora/panchanga/drik.py	yogam	yoga	speed_formula	daily_moon_speed+daily_sun_speed	const.use_planet_speed_for_panchangam_end_timings	820-847	PG11
+src/jhora/panchanga/drik.py	karana	karana	half_tithi_split	midpoint=0.5*(start+end)	branch by birth_time_hrs > midpoint	883-891	PG13
+src/jhora/panchanga/drik.py	vaara	vaara	formula_switch	ahargana_formula vs ceil_formula	const.use_aharghana_for_vaara_calcuation	899	PG14
+src/jhora/panchanga/vratha.py	tithi_dates	consumer_search	fixed_step_loop	skip_days=14 or 1	len(tithi_index_list)>1	186-190,202-214	PG16
+src/jhora/panchanga/vratha.py	nakshathra_dates	consumer_search	fixed_step_loop	skip_days=26 or 1	len(nakshathra_index_list)>1	227-230,245-246	PG17
+src/jhora/panchanga/vratha.py	yoga_dates	consumer_search	fixed_step_loop	skip_days=26 or 1	len(yoga_index_list)>0	260-263,272-273	PG18
+src/jhora/panchanga/vratha.py	search	consumer_search	pipeline_dispatch	delegate_to_tithi_nakshatra_yoga	all filters none => festival mode	383-405	PG19
+src/jhora/panchanga/surya_sidhantha.py	tithi	alt_engine	daily_motion_formula	td_left/(moon_dm-sun_dm)*24	direct angular difference	420-431	PG29
+src/jhora/panchanga/surya_sidhantha.py	nakshatra	alt_engine	daily_motion_formula	rem/moon_dm*24	nakshatra_pada remainder	435-442	PG30

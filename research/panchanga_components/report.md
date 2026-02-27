@@ -1,0 +1,24 @@
+# panchanga_components
+
+- status: active
+- artifacts:
+  - [panchanga_behavior_contract_map.engine_plus_consumers.md](./panchanga_behavior_contract_map.engine_plus_consumers.md)
+  - [_coverage_panchanga_callsites_engine_plus_consumers.tsv](./_coverage_panchanga_callsites_engine_plus_consumers.tsv)
+  - [_coverage_panchanga_algorithm_matrix.tsv](./_coverage_panchanga_algorithm_matrix.tsv)
+  - [_coverage_panchanga_output_contract_matrix.tsv](./_coverage_panchanga_output_contract_matrix.tsv)
+  - [_codepack/MANIFEST.tsv](./_codepack/MANIFEST.tsv)
+- observed PyJHora behaviors:
+  - `tithi()` switches between speed-based and inverse-lagrange branches by global constant.
+  - Mahabharatha-era tithi increment appears in `_get_tithi` and `tithi_using_planet_speed`.
+  - `vratha` search helpers use fixed step loops (`skip_days`) for tithi/nakshatra/yoga scans.
+  - Festival search path uses lazy CSV loading into global `festival_data` state.
+  - consumer callsites in `info.py`, `main.py`, `pancha_paksha.py`, and `charts.py` consume positional payload fields from `drik`.
+- inventory summary:
+- callsite rows: `1714`
+- unique `(file,function_context)`: `307`
+- residual callsites (`PG900`): `1532`
+- algorithm matrix rows (data rows): `16`
+- output contract matrix rows (data rows): `13`
+- codepack files: `9`
+- cross-cutting map:
+  - [sweep_2_architecture_coupling_contract_map.md](../../sweep_2_architecture_coupling_contract_map.md)
