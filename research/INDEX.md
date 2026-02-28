@@ -26,3 +26,6 @@
 
 - `transit_and_tajaka` — ACTIVE
   - `report`: `D:\Diba\research\transit_and_tajaka\report.md`
+
+- `yogas_and_doshas` — ACTIVE
+  - `report`: `D:\Diba\research\yogas_and_doshas\report.md`
