@@ -1,0 +1,4 @@
+producer_function	producer_shape	consumer_function	consumer_index_use	consumer_scope	match_status	evidence_lines	anchor_id
+is_solar_eclipse	scalar retflag from swe.sol_eclipse_how	not_found_in_non_ui_non_test_scope	none	none	no_internal_consumer	2292-2301	ABSENCE-OF-INTERNAL-ECLIPSE-CONSUMER
+next_solar_eclipse	list[retflag,tret,attrs]	not_found_in_non_ui_non_test_scope	none	none	no_internal_consumer	2302-2345	ABSENCE-OF-INTERNAL-ECLIPSE-CONSUMER
+next_lunar_eclipse	list[retflag,tret,attrs]	not_found_in_non_ui_non_test_scope	none	none	no_internal_consumer	2346-2382	ABSENCE-OF-INTERNAL-ECLIPSE-CONSUMER

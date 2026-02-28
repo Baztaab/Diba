@@ -1,0 +1,12 @@
+file	function	depends_on_module	depends_on_symbol	coupling_type	impact_area	notes	evidence_lines	anchor_id
+src/jhora/panchanga/drik.py	is_solar_eclipse	swisseph	sol_eclipse_how	native_api_wrapper	eclipse_eval	Swiss Ephemeris computes eclipse state directly	2292-2301	EG08
+src/jhora/panchanga/drik.py	next_solar_eclipse	swisseph	sol_eclipse_when_loc	native_api_wrapper	eclipse_search	Swiss Ephemeris performs location-based event search	2302-2345	EG08
+src/jhora/panchanga/drik.py	next_lunar_eclipse	swisseph	lun_eclipse_when_loc	native_api_wrapper	eclipse_search	Swiss Ephemeris performs location-based event search	2346-2382	EG08
+src/jhora/panchanga/drik.py	is_solar_eclipse	jhora.const	_TROPICAL_MODE	mode_switch	flag_selection	Tropical mode changes flags passed to Swiss Ephemeris	2296-2299	EG08
+src/jhora/panchanga/drik.py	is_solar_eclipse	swisseph	FLG_SWIEPH	flag_dependency	flag_selection	Always present in eclipse evaluation flags	2296-2299	EG08
+src/jhora/panchanga/drik.py	is_solar_eclipse	swisseph	FLG_SIDEREAL	flag_dependency	flag_selection	Added when not in tropical mode	2298-2299	EG08
+src/jhora/panchanga/drik.py	is_solar_eclipse	drik	_rise_flags	module_global_flag	flag_selection	Rise flags are mixed into sidereal evaluation mode	2298-2299	EG08
+src/jhora/panchanga/drik.py	is_solar_eclipse	jhora.utils	gregorian_to_jd	time_basis_conversion	calendar_day_reset	Input JD is converted to calendar date then rebuilt at 0h	2293-2294	EG02
+src/jhora/panchanga/drik.py	is_solar_eclipse	jhora.utils	jd_to_gregorian	time_basis_conversion	calendar_day_reset	Time-of-day is discarded before eclipse evaluation	2293-2294	EG02
+src/jhora/panchanga/drik.py	is_solar_eclipse	drik	Place	struct_contract	geopos_mapping	Place fields are (latitude, longitude, timezone)	41;2295-2300	EG01
+src/jhora/README.md	<module>	src/jhora/panchanga/drik.py	next_solar_eclipse|next_lunar_eclipse	release_note_touchpoint	documentation_evidence	README states eclipse functions were added in drik.py	752	EG09

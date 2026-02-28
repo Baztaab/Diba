@@ -32,3 +32,6 @@
 
 - `match_and_compatibility` — ACTIVE
   - `report`: `D:\Diba\research\match_and_compatibility\report.md`
+
+- `eclipses_and_grahana` — ACTIVE
+  - `report`: `D:\Diba\research\eclipses_and_grahana\report.md`
